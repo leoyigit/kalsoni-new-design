@@ -70,9 +70,11 @@
     }
     return '<header class="header"><div class="header__inner">' +
       '<nav class="header__nav">' +
+        nav('index.html', 'HOME', 'home') +
         nav('shop.html', 'SHOP', 'shop') +
         nav('collections.html', 'COLLECTIONS', 'collections') +
-        nav('wholesale.html', 'WHOLESALE', 'wholesale') +
+        nav('index.html#about', 'ABOUT US', 'about') +
+        nav('contact.html', 'CONTACT', 'contact') +
       '</nav>' +
       '<a href="index.html" class="header__logo">KALSONI</a>' +
       '<div class="header__actions">' +
@@ -89,12 +91,13 @@
         '<p class="footer__about">Modest activewear &amp; athleisure designed to move freely, comfortably, and with confidence.</p>' +
         '<div class="footer__social"><a href="https://www.instagram.com/kalsoniapparel/">INSTAGRAM</a><a href="https://www.facebook.com/kalsoniapparel/">FACEBOOK</a><a href="https://www.linkedin.com/company/kalsoni/">LINKEDIN</a></div></div>' +
       '<div><div class="footer__heading">HELP</div><div class="footer__links">' +
-        '<button data-open-sizeguide type="button">Size Guide</button><a href="contact.html">FAQ</a><a href="contact.html">Contact Us</a><a href="shop.html">Our Fabric</a><a href="collections.html">Collections</a></div></div>' +
+        '<button data-open-sizeguide type="button">Size Guide</button><a href="faq.html">FAQ</a><a href="contact.html">Contact Us</a><a href="fabric.html">Our Fabric</a><a href="collections.html">Collections</a></div></div>' +
       '<div><div class="footer__heading">ABOUT</div><div class="footer__links">' +
         '<a href="index.html#about">Who We Are</a><a href="wholesale.html">Wholesale</a><a href="contact.html">Send Feedback</a><a href="shop.html">Shop All</a></div></div>' +
       '<div><div class="footer__heading">FLAGSHIP STORES</div><div class="footer__stores">REI Bloomington<br><span>750 American Blvd W, MN 55420</span><br><br>REI Roseville<br><span>1955 County Road B2 W, MN 55113</span></div></div>' +
       '</div><div class="footer__bottom"><span>&copy; 2026 KALSONI. ALL RIGHTS RESERVED.</span>' +
-      '<span class="legal"><a href="#">PRIVACY POLICY</a><a href="#">TERMS OF SERVICE</a></span></div></div></footer>';
+      '<span class="legal"><a href="#">PRIVACY POLICY</a><a href="#">TERMS OF SERVICE</a></span>' +
+      '<span class="footer__powered">Powered by <a href="https://www.powercommerce.com" target="_blank" rel="noopener">Power Commerce</a></span></div></div></footer>';
   }
 
   function overlaysHTML() {
