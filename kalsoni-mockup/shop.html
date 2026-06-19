@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop — Kalsoni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favico.png">
+  <link rel="apple-touch-icon" href="favico.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="shop">
+
+  <main class="page-main">
+    <div class="page-head">
+      <span class="eyebrow">SHOP ALL</span>
+      <h1>The Kalsoni Edit</h1>
+      <p>Modest activewear engineered to move with you — from the studio to the street.</p>
+    </div>
+
+    <div class="shop-bar">
+      <div id="shop-pills" class="shop-pills"><!-- pills --></div>
+      <div class="shop-tools">
+        <span id="shop-result" class="shop-result"></span>
+        <select id="shop-sort" class="shop-sort">
+          <option value="featured">SORT: FEATURED</option>
+          <option value="price-asc">PRICE: LOW TO HIGH</option>
+          <option value="price-desc">PRICE: HIGH TO LOW</option>
+          <option value="newest">NEWEST</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="shop-grid" class="shop-grid"><!-- products --></div>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;}
+    body{margin:0;background:#faf7f2;}
+    ::selection{background:#b26749;color:#fff;}
+    @keyframes kmarq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    @keyframes kfade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+    @keyframes kdrawer{from{transform:translateX(100%)}to{transform:translateX(0)}}
+    @keyframes kfadein{from{opacity:0}to{opacity:1}}
+    @keyframes kdrop{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+    @keyframes ktoast{from{opacity:0;transform:transl(0,18px)}to{opacity:1;transform:none}}
+    @keyframes kpop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+    input,select,button,textarea{font-family:'Jost',sans-serif;}
+    input::placeholder,textarea::placeholder{color:#a59c8f;}
+    input:focus,textarea:focus,select:focus{outline:none;border-color:#16130f;}
+    a{color:inherit;text-decoration:none;}
+  </style>
+</helmet>
+
+<div style="--ink:#16130f; --paper:#faf7f2; --accent:#b26749; --accent-deep:#8f4f38; --muted:#6f675d; --line:#e7e0d4; --line2:#d8d0c2; --card:#ffffff; min-height:100vh; background:var(--paper); color:var(--ink); font-family:'Jost',sans-serif; font-weight:300; -webkit-font-smoothing:antialiased;">
+
+  <!-- ANNOUNCEMENT MARQUEE -->
+  <div style="background:var(--ink); color:var(--paper); overflow:hidden; white-space:nowrap;">
+    <div style="display:inline-block; animation:kmarq 28s linear infinite; padding:11px 0; font-size:11px; letter-spacing:.26em;">
+      <span style="padding:0 38px;">FREE SHIPPING OVER $75</span><span style="padding:0 38px; color:var(--accent);">●</span><span style="padding:0 38px;">MODEST ACTIVEWEAR — MADE BY &amp; FOR WOMEN</span><span style="padding:0 38px; color:var(--accent);">●</span><span style="padding:0 38px;">PERFORMANCE FABRIC, BUILT TO MOVE</span><span style="padding:0 38px; color:var(--accent);">●</span><span style="padding:0 38px;">FREE SHIPPING OVER $75</span><span style="padding:0 38px; color:var(--accent);">●</span><span style="padding:0 38px;">MODEST ACTIVEWEAR — MADE BY &amp; FOR WOMEN</span><span style="padding:0 38px; color:var(--accent);">●</span><span style="padding:0 38px;">PERFORMANCE FABRIC, BUILT TO MOVE</span><span style="padding:0 38px; color:var(--accent);">●</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header style="position:sticky; top:0; z-index:40; background:rgba(250,247,242,.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);">
+    <div style="max-width:1320px; margin:0 auto; padding:0 32px; height:74px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center;">
+      <nav style="display:flex; gap:22px; font-size:11.5px; letter-spacing:.16em;">
+        <button onClick="{{ goShop }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;letter-spacing:inherit;font-size:inherit;">SHOP</button>
+        <button onClick="{{ goCollections }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;letter-spacing:inherit;font-size:inherit;">COLLECTIONS</button>
+        <button onClick="{{ goAbout }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;letter-spacing:inherit;font-size:inherit;">ABOUT</button>
+        <button onClick="{{ goWholesale }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;letter-spacing:inherit;font-size:inherit;">WHOLESALE</button>
+        <button onClick="{{ goContact }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;letter-spacing:inherit;font-size:inherit;">CONTACT</button>
+      </nav>
+      <button onClick="{{ goHome }}" style="background:none;border:none;cursor:pointer;color:inherit;font-size:26px;letter-spacing:.4em;font-weight:500;padding:0 0 0 .4em;">KALSONI</button>
+      <div style="display:flex; gap:22px; justify-content:flex-end; align-items:center;">
+        <button onClick="{{ openSearch }}" aria-label="Search" style="background:none;border:none;cursor:pointer;color:inherit;display:flex;padding:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+        </button>
+        <button aria-label="Account" style="background:none;border:none;cursor:pointer;color:inherit;display:flex;padding:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 20c0-4 3.5-6 7.5-6s7.5 2 7.5 6"></path></svg>
+        </button>
+        <button onClick="{{ openCart }}" aria-label="Cart" style="background:none;border:none;cursor:pointer;color:inherit;display:flex;align-items:center;gap:7px;padding:0;position:relative;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6.5 8h11l-1 12.5h-9L6.5 8z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg>
+          <sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ true }}"><span style="font-size:12px; letter-spacing:.05em; min-width:14px;">{{ cartCount }}</span></sc-if>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HOME ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <main>
+
+    <!-- HERO v1: full-bleed -->
+    <sc-if value="{{ isHero1 }}" hint-placeholder-val="{{ true }}">
+    <section style="position:relative; height:80vh; min-height:560px; overflow:hidden; background:#e7ded2;">
+      <img src="https://images.squarespace-cdn.com/content/v1/6222be71457f4243db6467da/14a34175-8116-46df-a4be-b7dbea586440/IMG_7321.jpg?format=1800w" alt="Modest activewear" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 28%;">
+      <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,18,15,.12) 0%, rgba(20,18,15,.05) 40%, rgba(20,18,15,.55) 100%);"></div>
+      <div style="position:relative; max-width:1320px; margin:0 auto; padding:0 32px; height:100%; display:flex; flex-direction:column; justify-content:center;">
+        <span style="color:rgba(255,255,255,.85); font-size:11px; letter-spacing:.34em; margin-bottom:20px;">MODEST ACTIVEWEAR &amp; ATHLEISURE</span>
+        <h1 style="color:#fff; font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(38px,6vw,82px); line-height:1.02; margin:0; max-width:13ch;">Designed for modesty, built for performance</h1>
+        <div style="display:flex; gap:16px; margin-top:34px; flex-wrap:wrap;">
+          <button onClick="{{ goShop }}" style="background:var(--paper); color:var(--ink); border:none; padding:17px 40px; font-size:12px; letter-spacing:.22em; cursor:pointer;" style-hover="background:#fff;">SHOP NOW</button>
+          <button onClick="{{ goAbout }}" style="background:transparent; color:#fff; border:1px solid rgba(255,255,255,.7); padding:17px 36px; font-size:12px; letter-spacing:.22em; cursor:pointer;" style-hover="border-color:#fff;">OUR STORY</button>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- HERO v2: editorial split -->
+    <sc-if value="{{ isHero2 }}" hint-placeholder-val="{{ true }}">
+    <section style="display:grid; grid-template-columns:1fr 1fr; height:80vh; min-height:560px;">
+      <div style="background:var(--ink); color:var(--paper); display:flex; flex-direction:column; justify-content:center; padding:7vw 6vw;">
+        <span style="font-size:11px; letter-spacing:.34em; color:var(--accent); margin-bottom:24px;">/KAL-SONI/ — CONFIDENCE</span>
+        <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(40px,4.6vw,72px); line-height:1.04; margin:0;">Move freely.<br>Stay covered.<br><em style="color:var(--accent);">Feel confident.</em></h1>
+        <p style="font-weight:300; font-size:16px; line-height:1.7; color:rgba(250,247,242,.72); max-width:42ch; margin:28px 0 38px;">Multi-functional, versatile modest activewear designed to keep you comfortable and confident during all of your activities.</p>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <button onClick="{{ goShop }}" style="background:var(--paper); color:var(--ink); border:none; padding:17px 40px; font-size:12px; letter-spacing:.22em; cursor:pointer;">SHOP THE COLLECTION</button>
+        </div>
+      </div>
+      <div style="background:#e7ded2; overflow:hidden;"><img src="https://images.squarespace-cdn.com/content/v1/6222be71457f4243db6467da/14a34175-8116-46df-a4be-b7dbea586440/IMG_7321.jpg?format=1800w" alt="Modest activewear" style="width:100%; height:100%; object-fit:cover; object-position:50% 25%;"></div>
+    </section>
+    </sc-if>
+
+    <!-- HERO v3: big type -->
+    <sc-if value="{{ isHero3 }}" hint-placeholder-val="{{ true }}">
+    <section style="max-width:1320px; margin:0 auto; padding:64px 32px 40px;">
+      <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(48px,11vw,168px); line-height:.92; letter-spacing:-.01em; margin:0; text-align:left;">BUILT TO MOVE</h1>
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:18px; flex-wrap:wrap; gap:18px;">
+        <p style="font-size:12px; letter-spacing:.2em; color:var(--muted); max-width:30ch; margin:0;">MODEST ACTIVEWEAR ENGINEERED FOR PERFORMANCE — DESIGNED FOR EVERY GIRL AND WOMAN.</p>
+        <button onClick="{{ goShop }}" style="background:var(--ink); color:var(--paper); border:none; padding:16px 38px; font-size:12px; letter-spacing:.22em; cursor:pointer;">SHOP NOW →</button>
+      </div>
+      <div style="margin-top:30px; height:60vh; min-height:440px; overflow:hidden; background:#e7ded2;"><img src="https://images.squarespace-cdn.com/content/v1/6222be71457f4243db6467da/14a34175-8116-46df-a4be-b7dbea586440/IMG_7321.jpg?format=1800w" alt="Modest activewear" style="width:100%; height:100%; object-fit:cover; object-position:50% 22%;"></div>
+    </section>
+    </sc-if>
+
+    <!-- VALUE PROPS -->
+    <section style="max-width:1320px; margin:0 auto; padding:60px 32px; display:grid; grid-template-columns:repeat(4,1fr); gap:34px; border-bottom:1px solid var(--line);">
+      <div><div style="font-size:11px; letter-spacing:.26em; color:var(--accent); margin-bottom:12px;">01</div><div style="font-size:14px; letter-spacing:.12em; margin-bottom:8px;">MODEST BY DESIGN</div><p style="font-size:13.5px; line-height:1.6; color:var(--muted); margin:0;">Full coverage cuts that never compromise on movement.</p></div>
+      <div><div style="font-size:11px; letter-spacing:.26em; color:var(--accent); margin-bottom:12px;">02</div><div style="font-size:14px; letter-spacing:.12em; margin-bottom:8px;">PERFORMANCE FABRIC</div><p style="font-size:13.5px; line-height:1.6; color:var(--muted); margin:0;">Breathable, moisture-wicking and built to last.</p></div>
+      <div><div style="font-size:11px; letter-spacing:.26em; color:var(--accent); margin-bottom:12px;">03</div><div style="font-size:14px; letter-spacing:.12em; margin-bottom:8px;">MADE BY &amp; FOR WOMEN</div><p style="font-size:13.5px; line-height:1.6; color:var(--muted); margin:0;">Founded by a Muslim woman athlete, designed with you in mind.</p></div>
+      <div><div style="font-size:11px; letter-spacing:.26em; color:var(--accent); margin-bottom:12px;">04</div><div style="font-size:14px; letter-spacing:.12em; margin-bottom:8px;">FREE SHIPPING $75+</div><p style="font-size:13.5px; line-height:1.6; color:var(--muted); margin:0;">Quick, easy returns within 30 days, always.</p></div>
+    </section>
+
+    <!-- FEATURED COLLECTION -->
+    <section style="max-width:1320px; margin:0 auto; padding:78px 32px 30px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:14px;">
+        <div><span style="font-size:11px; letter-spacing:.3em; color:var(--accent);">BESTSELLERS</span><h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(32px,4vw,52px); margin:8px 0 0; line-height:1;">The Collection</h2></div>
+        <button onClick="{{ goShop }}" style="background:none; border:none; border-bottom:1px solid var(--ink); padding:0 0 4px; font-size:12px; letter-spacing:.2em; cursor:pointer; color:inherit;">VIEW ALL →</button>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:26px 22px;">
+        <sc-for list="{{ featured }}" as="card" hint-placeholder-count="4">
+          <div style="cursor:pointer;" onClick="{{ card.onView }}">
+            <div style="position:relative; overflow:hidden; background:#efe9df; aspect-ratio:3/4;">
+              <img src="{{ card.img }}" alt="{{ card.name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 1s cubic-bezier(.2,.8,.2,1);" style-hover="transform:scale(1.05);">
+              <sc-if value="{{ card.isNew }}" hint-placeholder-val="{{ true }}"><span style="position:absolute; top:13px; left:13px; background:var(--paper); color:var(--ink); font-size:9.5px; letter-spacing:.2em; padding:6px 9px;">NEW</span></sc-if>
+              <button onClick="{{ card.onQuickAdd }}" aria-label="Quick add" style="position:absolute; top:12px; right:12px; width:38px; height:38px; border-radius:50%; background:rgba(250,247,242,.92); border:none; cursor:pointer; font-size:20px; font-weight:300; line-height:1; color:var(--ink); display:flex; align-items:center; justify-content:center; padding-bottom:3px;" style-hover="background:var(--ink); color:var(--paper);">+</button>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:15px; gap:10px;">
+              <div><div style="font-size:10px; letter-spacing:.22em; color:var(--muted); margin-bottom:6px;">{{ card.categoryLabel }}</div><div style="font-size:14.5px; letter-spacing:.02em;">{{ card.name }}</div></div>
+              <div style="font-size:14px;">{{ card.priceLabel }}</div>
+            </div>
+            <div style="display:flex; gap:6px; margin-top:11px;"><sc-for list="{{ card.colorDots }}" as="d" hint-placeholder-count="2"><span style="width:13px; height:13px; border-radius:50%; border:1px solid var(--line2); background:{{ d.hex }};"></span></sc-for></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- EDITORIAL: NAME ORIGIN -->
+    <section style="background:var(--ink); color:var(--paper); margin-top:78px;">
+      <div style="max-width:1320px; margin:0 auto; padding:96px 32px; display:grid; grid-template-columns:1.1fr 1fr; gap:70px; align-items:center;">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(40px,5.5vw,86px); color:var(--accent); line-height:1;">/Kal-SONI/</div>
+          <div style="font-size:11px; letter-spacing:.3em; color:rgba(250,247,242,.6); margin:26px 0 6px;">NAME ORIGIN — SOMALIA</div>
+          <div style="font-size:14px; letter-spacing:.06em;">(adjective) — to be confident</div>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:26px; line-height:1.5; font-weight:400; margin:30px 0 0; max-width:34ch; color:rgba(250,247,242,.92);">Whatever sets her in motion, our designs are consciously crafted to let her move freely, be who she is, and feel confident throughout her fitness journey.</p>
+        </div>
+        <div style="aspect-ratio:4/5; overflow:hidden; background:#2a2520;"><img src="{{ storyImg }}" alt="Confident in motion" loading="lazy" style="width:100%; height:100%; object-fit:cover;"></div>
+      </div>
+    </section>
+
+    <!-- CATEGORY TRIO -->
+    <section style="max-width:1320px; margin:0 auto; padding:80px 32px 30px;">
+      <div style="text-align:center; margin-bottom:44px;"><span style="font-size:11px; letter-spacing:.3em; color:var(--accent);">SHOP BY CATEGORY</span><h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(30px,3.6vw,46px); margin:8px 0 0;">Find your fit</h2></div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px;">
+        <sc-for list="{{ homeCategories }}" as="cat" hint-placeholder-count="3">
+          <div onClick="{{ cat.onClick }}" style="position:relative; aspect-ratio:4/5; overflow:hidden; cursor:pointer; background:#e7ded2;">
+            <img src="{{ cat.img }}" alt="{{ cat.label }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 1.1s cubic-bezier(.2,.8,.2,1);" style-hover="transform:scale(1.06);">
+            <div style="position:absolute; inset:0; background:linear-gradient(180deg,transparent 45%,rgba(20,18,15,.6));"></div>
+            <div style="position:absolute; left:24px; bottom:22px; color:#fff;"><div style="font-family:'Cormorant Garamond',serif; font-size:30px; line-height:1;">{{ cat.label }}</div><div style="font-size:11px; letter-spacing:.22em; margin-top:8px;">SHOP NOW →</div></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- MISSION / COMMUNITY -->
+    <section id="about-section" style="max-width:1320px; margin:0 auto; padding:84px 32px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+      <div style="aspect-ratio:5/6; overflow:hidden; background:#e7ded2;"><img src="{{ communityImg }}" alt="Made by and for women" loading="lazy" style="width:100%; height:100%; object-fit:cover;"></div>
+      <div>
+        <span style="font-size:11px; letter-spacing:.3em; color:var(--accent);">OUR MISSION</span>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(30px,3.8vw,50px); line-height:1.08; margin:14px 0 0;">Made by and for women</h2>
+        <p style="font-size:15.5px; line-height:1.8; color:var(--muted); margin:26px 0 0; max-width:46ch;">Founded by a Muslim woman athlete to address the lack of culturally-inclusive activewear, we're dedicated to making modest activewear accessible for all girls and women — so they can move freely, comfortably, and with style.</p>
+        <div style="display:flex; gap:54px; margin-top:38px;">
+          <div><div style="font-family:'Cormorant Garamond',serif; font-size:42px; line-height:1;">100%</div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:6px;">WOMEN-LED</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif; font-size:42px; line-height:1;">4.9★</div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:6px;">AVG RATING</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif; font-size:42px; line-height:1;">2k+</div><div style="font-size:11px; letter-spacing:.2em; color:var(--muted); margin-top:6px;">HAPPY WOMEN</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS / SOCIAL PROOF -->
+    <section style="background:#f1ece3; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+      <div style="max-width:1320px; margin:0 auto; padding:74px 32px;">
+        <div style="text-align:center; margin-bottom:44px;"><div style="color:var(--accent); letter-spacing:.3em; font-size:13px;">★★★★★</div><h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(28px,3.4vw,44px); margin:10px 0 0;">Loved by women in motion</h2></div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px;">
+          <div style="background:var(--card); padding:34px 30px; border:1px solid var(--line);"><div style="color:var(--accent); letter-spacing:.2em; font-size:12px;">★★★★★</div><p style="font-family:'Cormorant Garamond',serif; font-size:20px; line-height:1.5; margin:16px 0 22px;">"Finally activewear that keeps me covered and actually performs. The sport hijab stays put through every workout."</p><div style="font-size:12px; letter-spacing:.14em;">AMINA H.</div><div style="font-size:11px; letter-spacing:.1em; color:var(--muted); margin-top:4px;">VERIFIED BUYER</div></div>
+          <div style="background:var(--card); padding:34px 30px; border:1px solid var(--line);"><div style="color:var(--accent); letter-spacing:.2em; font-size:12px;">★★★★★</div><p style="font-family:'Cormorant Garamond',serif; font-size:20px; line-height:1.5; margin:16px 0 22px;">"The fabric is unbelievably soft and breathable. I wear the jacket everywhere, not just the gym."</p><div style="font-size:12px; letter-spacing:.14em;">LAYLA M.</div><div style="font-size:11px; letter-spacing:.1em; color:var(--muted); margin-top:4px;">VERIFIED BUYER</div></div>
+          <div style="background:var(--card); padding:34px 30px; border:1px solid var(--line);"><div style="color:var(--accent); letter-spacing:.2em; font-size:12px;">★★★★★</div><p style="font-family:'Cormorant Garamond',serif; font-size:20px; line-height:1.5; margin:16px 0 22px;">"Confidence is the right word. I feel like myself working out for the first time in years. Thank you Kalsoni."</p><div style="font-size:12px; letter-spacing:.14em;">SUMAYA A.</div><div style="font-size:11px; letter-spacing:.1em; color:var(--muted); margin-top:4px;">VERIFIED BUYER</div></div>
+        </div>
+        <div style="text-align:center; margin-top:50px; font-size:11px; letter-spacing:.24em; color:var(--muted);">STOCKED AT&nbsp;&nbsp; REI CO-OP&nbsp;&nbsp;·&nbsp;&nbsp;FOUNDED OUTDOORS&nbsp;&nbsp;·&nbsp;&nbsp;TARGET × ADIDAS&nbsp;&nbsp;·&nbsp;&nbsp;PATH AHEAD VENTURES</div>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section style="max-width:1320px; margin:0 auto; padding:70px 32px;">
+      <div style="text-align:center; margin-bottom:30px;"><a href="https://www.instagram.com/kalsoniapparel/" style="font-size:13px; letter-spacing:.24em;">FOLLOW US @KALSONIAPPAREL →</a></div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;">
+        <sc-for list="{{ igImages }}" as="ig" hint-placeholder-count="4"><div style="aspect-ratio:1/1; overflow:hidden; background:#e7ded2;"><img src="{{ ig }}" alt="Kalsoni on Instagram" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform .9s;" style-hover="transform:scale(1.06);"></div></sc-for>
+      </div>
+    </section>
+
+  </main>
+  </sc-if>
+
+  <!-- ============ SHOP ============ -->
+  <sc-if value="{{ isShop }}" hint-placeholder-val="{{ true }}">
+  <main style="max-width:1320px; margin:0 auto; padding:54px 32px 90px; min-height:70vh;">
+    <div style="text-align:center; margin-bottom:14px;"><span style="font-size:11px; letter-spacing:.3em; color:var(--accent);">SHOP ALL</span><h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(36px,5vw,64px); margin:8px 0 0;">The Kalsoni Edit</h1></div>
+    <p style="text-align:center; color:var(--muted); font-size:14px; max-width:48ch; margin:0 auto 40px;">Modest activewear engineered to move with you — from the studio to the street.</p>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding-bottom:22px; border-bottom:1px solid var(--line); flex-wrap:wrap;">
+      <div style="display:flex; gap:9px; flex-wrap:wrap;">
+        <sc-for list="{{ filterPills }}" as="pill" hint-placeholder-count="6"><button onClick="{{ pill.onClick }}" style="{{ pill.style }}">{{ pill.label }}</button></sc-for>
+      </div>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <span style="font-size:12px; color:var(--muted); letter-spacing:.08em;">{{ resultLabel }}</span>
+        <select value="{{ sortValue }}" onChange="{{ onSort }}" style="border:1px solid var(--line2); background:transparent; padding:10px 14px; font-size:12px; letter-spacing:.12em; cursor:pointer; color:var(--ink);">
+          <option value="featured">SORT: FEATURED</option>
+          <option value="price-asc">PRICE: LOW TO HIGH</option>
+          <option value="price-desc">PRICE: HIGH TO LOW</option>
+          <option value="newest">NEWEST</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:34px 22px; margin-top:36px;">
+      <sc-for list="{{ displayProducts }}" as="card" hint-placeholder-count="8">
+        <div style="cursor:pointer;" onClick="{{ card.onView }}">
+          <div style="position:relative; overflow:hidden; background:#efe9df; aspect-ratio:3/4;">
+            <img src="{{ card.img }}" alt="{{ card.name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 1s cubic-bezier(.2,.8,.2,1);" style-hover="transform:scale(1.05);">
+            <sc-if value="{{ card.isNew }}" hint-placeholder-val="{{ true }}"><span style="position:absolute; top:13px; left:13px; background:var(--paper); color:var(--ink); font-size:9.5px; letter-spacing:.2em; padding:6px 9px;">NEW</span></sc-if>
+            <button onClick="{{ card.onQuickAdd }}" aria-label="Quick add" style="position:absolute; top:12px; right:12px; width:38px; height:38px; border-radius:50%; background:rgba(250,247,242,.92); border:none; cursor:pointer; font-size:20px; font-weight:300; line-height:1; color:var(--ink); display:flex; align-items:center; justify-content:center; padding-bottom:3px;" style-hover="background:var(--ink); color:var(--paper);">+</button>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:15px; gap:10px;">
+            <div><div style="font-size:10px; letter-spacing:.22em; color:var(--muted); margin-bottom:6px;">{{ card.categoryLabel }}</div><div style="font-size:14.5px;">{{ card.name }}</div></div>
+            <div style="font-size:14px;">{{ card.priceLabel }}</div>
+          </div>
+          <div style="display:flex; gap:6px; margin-top:11px;"><sc-for list="{{ card.colorDots }}" as="d" hint-placeholder-count="2"><span style="width:13px; height:13px; border-radius:50%; border:1px solid var(--line2); background:{{ d.hex }};"></span></sc-for></div>
+        </div>
+      </sc-for>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ============ PRODUCT ============ -->
+  <sc-if value="{{ isProduct }}" hint-placeholder-val="{{ true }}">
+  <main style="max-width:1320px; margin:0 auto; padding:30px 32px 90px;">
+    <div style="font-size:11px; letter-spacing:.16em; color:var(--muted); margin-bottom:30px;"><button onClick="{{ goShop }}" style="background:none;border:none;cursor:pointer;color:inherit;letter-spacing:inherit;font-size:inherit;padding:0;">SHOP</button> &nbsp;/&nbsp; {{ pdp.categoryLabel }} &nbsp;/&nbsp; <span style="color:var(--ink);">{{ pdp.name }}</span></div>
+
+    <div style="display:grid; grid-template-columns:1.15fr 1fr; gap:60px; align-items:start;">
+      <!-- gallery -->
+      <div style="display:grid; grid-template-columns:78px 1fr; gap:14px;">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <sc-for list="{{ pdp.thumbs }}" as="t" hint-placeholder-count="3"><div onClick="{{ t.onSelect }}" style="aspect-ratio:3/4; overflow:hidden; cursor:pointer; background:#efe9df; border:1px solid {{ t.border }};"><img src="{{ t.img }}" alt="View" style="width:100%; height:100%; object-fit:cover;"></div></sc-for>
+        </div>
+        <div style="aspect-ratio:3/4; overflow:hidden; background:#efe9df;"><img src="{{ pdp.mainImg }}" alt="{{ pdp.name }}" style="width:100%; height:100%; object-fit:cover;"></div>
+      </div>
+
+      <!-- info -->
+      <div style="position:sticky; top:96px;">
+        <div style="font-size:11px; letter-spacing:.24em; color:var(--accent); margin-bottom:12px;">{{ pdp.categoryLabel }}</div>
+        <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(32px,3.6vw,48px); line-height:1.05; margin:0;">{{ pdp.name }}</h1>
+        <div style="display:flex; align-items:center; gap:14px; margin:16px 0 22px;">
+          <span style="font-size:22px;">{{ pdp.priceLabel }}</span>
+          <span style="width:1px; height:16px; background:var(--line2);"></span>
+          <span style="color:var(--accent); letter-spacing:.12em; font-size:13px;">★★★★★</span>
+          <span style="font-size:12px; color:var(--muted);">{{ pdp.ratingLabel }} ({{ pdp.reviewCount }})</span>
+        </div>
+        <p style="font-size:14.5px; line-height:1.75; color:var(--muted); margin:0 0 30px; max-width:50ch;">{{ pdp.blurb }}</p>
+
+        <!-- color -->
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px;"><span style="font-size:11px; letter-spacing:.2em;">COLOR — <span style="color:var(--muted);">{{ pdp.activeColorName }}</span></span></div>
+        <div style="display:flex; gap:10px; margin-bottom:28px;">
+          <sc-for list="{{ pdp.colors }}" as="c" hint-placeholder-count="3"><button onClick="{{ c.onSelect }}" aria-label="{{ c.name }}" style="width:30px; height:30px; border-radius:50%; cursor:pointer; padding:0; background:{{ c.hex }}; border:1px solid var(--line2); outline-offset:3px; outline:{{ c.outline }};"></button></sc-for>
+        </div>
+
+        <!-- size -->
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px;"><span style="font-size:11px; letter-spacing:.2em;">SIZE</span><button onClick="{{ openSizeGuide }}" style="background:none; border:none; border-bottom:1px solid var(--ink); padding:0 0 2px; font-size:11px; letter-spacing:.1em; cursor:pointer; color:inherit;">SIZE GUIDE</button></div>
+        <div style="display:flex; gap:9px; flex-wrap:wrap; margin-bottom:30px;">
+          <sc-for list="{{ pdp.sizes }}" as="s" hint-placeholder-count="6"><button onClick="{{ s.onSelect }}" disabled="{{ s.disabled }}" style="{{ s.style }}">{{ s.label }}</button></sc-for>
+        </div>
+
+        <!-- qty + add -->
+        <div style="display:flex; gap:14px; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; border:1px solid var(--line2);">
+            <button onClick="{{ decQty }}" style="background:none; border:none; width:46px; height:54px; font-size:18px; cursor:pointer; color:inherit;">−</button>
+            <span style="width:34px; text-align:center; font-size:14px;">{{ qty }}</span>
+            <button onClick="{{ incQty }}" style="background:none; border:none; width:46px; height:54px; font-size:18px; cursor:pointer; color:inherit;">+</button>
+          </div>
+          <button onClick="{{ pdpAdd }}" style="flex:1; background:var(--ink); color:var(--paper); border:none; font-size:12px; letter-spacing:.22em; cursor:pointer;" style-hover="background:#000;">ADD TO CART — {{ pdp.priceLabel }}</button>
+        </div>
+        <div style="font-size:12px; color:var(--muted); letter-spacing:.06em; margin-bottom:30px;">✓ Free shipping over $75 &nbsp;·&nbsp; 30-day easy returns</div>
+
+        <!-- accordion -->
+        <div style="border-top:1px solid var(--line);">
+          <sc-for list="{{ pdp.accordion }}" as="a" hint-placeholder-count="3">
+            <div style="border-bottom:1px solid var(--line);">
+              <button onClick="{{ a.onToggle }}" style="width:100%; display:flex; justify-content:space-between; align-items:center; background:none; border:none; padding:18px 0; font-size:12px; letter-spacing:.16em; cursor:pointer; color:inherit;">{{ a.title }}<span style="font-size:18px; font-weight:300;">{{ a.sign }}</span></button>
+              <sc-if value="{{ a.open }}" hint-placeholder-val="{{ false }}"><p style="font-size:13.5px; line-height:1.75; color:var(--muted); margin:0 0 20px;">{{ a.body }}</p></sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- reviews -->
+    <section style="margin-top:90px; border-top:1px solid var(--line); padding-top:54px;">
+      <div style="display:grid; grid-template-columns:280px 1fr; gap:48px;">
+        <div><h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:34px; margin:0;">Reviews</h2><div style="color:var(--accent); letter-spacing:.16em; margin-top:12px;">★★★★★</div><div style="font-size:13px; color:var(--muted); margin-top:8px;">{{ pdp.ratingLabel }} out of 5 · {{ pdp.reviewCount }} reviews</div></div>
+        <div style="display:flex; flex-direction:column; gap:26px;">
+          <sc-for list="{{ pdp.reviews }}" as="r" hint-placeholder-count="3">
+            <div style="border-bottom:1px solid var(--line); padding-bottom:24px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;"><span style="color:var(--accent); letter-spacing:.14em; font-size:12px;">★★★★★</span><span style="font-size:11px; color:var(--muted); letter-spacing:.1em;">{{ r.date }}</span></div>
+              <div style="font-size:14px; letter-spacing:.04em; margin:12px 0 6px;">{{ r.title }}</div>
+              <p style="font-size:14px; line-height:1.7; color:var(--muted); margin:0 0 10px;">{{ r.body }}</p>
+              <div style="font-size:11px; letter-spacing:.12em; color:var(--muted);">{{ r.name }} · VERIFIED BUYER</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- related -->
+    <section style="margin-top:80px;">
+      <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:34px; margin:0 0 30px;">You may also like</h2>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:22px;">
+        <sc-for list="{{ pdp.related }}" as="card" hint-placeholder-count="4">
+          <div style="cursor:pointer;" onClick="{{ card.onView }}">
+            <div style="position:relative; overflow:hidden; background:#efe9df; aspect-ratio:3/4;"><img src="{{ card.img }}" alt="{{ card.name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 1s;" style-hover="transform:scale(1.05);"></div>
+            <div style="display:flex; justify-content:space-between; margin-top:13px; font-size:14px;"><span>{{ card.name }}</span><span>{{ card.priceLabel }}</span></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ============ CHECKOUT ============ -->
+  <sc-if value="{{ isCheckout }}" hint-placeholder-val="{{ true }}">
+  <main style="max-width:1180px; margin:0 auto; padding:46px 32px 90px; min-height:70vh;">
+    <button onClick="{{ goShop }}" style="background:none; border:none; padding:0; font-size:11px; letter-spacing:.18em; color:var(--muted); cursor:pointer; margin-bottom:26px;">← CONTINUE SHOPPING</button>
+    <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(32px,4vw,52px); margin:0 0 38px;">Checkout</h1>
+    <div style="display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:start;">
+      <form onSubmit="{{ onPlaceOrder }}" style="display:flex; flex-direction:column; gap:34px;">
+        <div>
+          <div style="font-size:12px; letter-spacing:.2em; margin-bottom:16px;">01 — CONTACT</div>
+          <input type="email" placeholder="Email address" style="width:100%; border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+        </div>
+        <div>
+          <div style="font-size:12px; letter-spacing:.2em; margin-bottom:16px;">02 — SHIPPING ADDRESS</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <input placeholder="First name" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+            <input placeholder="Last name" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+            <input placeholder="Address" style="grid-column:1/3; border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+            <input placeholder="City" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+            <input placeholder="ZIP / Postal code" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; letter-spacing:.2em; margin-bottom:16px;">03 — DELIVERY</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <label style="display:flex; justify-content:space-between; align-items:center; border:1px solid var(--ink); background:var(--card); padding:15px 16px; font-size:13px; cursor:pointer;"><span style="display:flex; align-items:center; gap:10px;"><span style="width:9px;height:9px;border-radius:50%;background:var(--accent);"></span>Standard · 3–5 business days</span><span>{{ shipLabel }}</span></label>
+            <label style="display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:13px; cursor:pointer; color:var(--muted);"><span style="display:flex; align-items:center; gap:10px;"><span style="width:9px;height:9px;border-radius:50%;border:1px solid var(--line2);"></span>Express · 1–2 business days</span><span>$14.95</span></label>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; letter-spacing:.2em; margin-bottom:16px;">04 — PAYMENT</div>
+          <div style="display:grid; grid-template-columns:1fr; gap:12px;">
+            <input placeholder="Card number" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;"><input placeholder="MM / YY" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;"><input placeholder="CVC" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;"></div>
+          </div>
+        </div>
+        <button type="submit" style="background:var(--ink); color:var(--paper); border:none; padding:18px; font-size:12px; letter-spacing:.24em; cursor:pointer;">PLACE ORDER — {{ totalLabel }}</button>
+      </form>
+
+      <aside style="background:var(--card); border:1px solid var(--line); padding:30px;">
+        <div style="font-size:12px; letter-spacing:.2em; margin-bottom:22px;">ORDER SUMMARY</div>
+        <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}"><p style="color:var(--muted); font-size:14px;">Your cart is empty. <button onClick="{{ goShop }}" style="background:none;border:none;border-bottom:1px solid var(--ink);cursor:pointer;color:inherit;padding:0 0 1px;">Shop now</button></p></sc-if>
+        <div style="display:flex; flex-direction:column; gap:18px;">
+          <sc-for list="{{ cartItems }}" as="it" hint-placeholder-count="2">
+            <div style="display:flex; gap:14px;">
+              <div style="width:58px; height:74px; background:#efe9df; overflow:hidden; flex:none; position:relative;"><img src="{{ it.img }}" alt="{{ it.name }}" style="width:100%;height:100%;object-fit:cover;"><span style="position:absolute; top:-7px; right:-7px; width:20px; height:20px; border-radius:50%; background:var(--ink); color:var(--paper); font-size:11px; display:flex; align-items:center; justify-content:center;">{{ it.qty }}</span></div>
+              <div style="flex:1; display:flex; flex-direction:column; justify-content:center;"><div style="font-size:13.5px;">{{ it.name }}</div><div style="font-size:11px; letter-spacing:.08em; color:var(--muted); margin-top:4px;">{{ it.meta }}</div></div>
+              <div style="font-size:13px; align-self:center;">{{ it.lineLabel }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="border-top:1px solid var(--line); margin-top:24px; padding-top:18px; display:flex; flex-direction:column; gap:11px; font-size:13.5px;">
+          <div style="display:flex; justify-content:space-between; color:var(--muted);"><span>Subtotal</span><span style="color:var(--ink);">{{ subtotalLabel }}</span></div>
+          <div style="display:flex; justify-content:space-between; color:var(--muted);"><span>Shipping</span><span style="color:var(--ink);">{{ shipLabel }}</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--line); margin-top:8px; padding-top:14px; font-size:17px;"><span>Total</span><span>{{ totalLabel }}</span></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ============ CONFIRMATION ============ -->
+  <sc-if value="{{ isConfirmed }}" hint-placeholder-val="{{ true }}">
+  <main style="max-width:680px; margin:0 auto; padding:90px 32px 120px; text-align:center; min-height:70vh;">
+    <div style="width:64px; height:64px; border-radius:50%; border:1px solid var(--accent); color:var(--accent); display:flex; align-items:center; justify-content:center; font-size:28px; margin:0 auto 28px;">✓</div>
+    <span style="font-size:11px; letter-spacing:.3em; color:var(--accent);">ORDER CONFIRMED</span>
+    <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(34px,5vw,58px); margin:14px 0 0;">Thank you, you're set</h1>
+    <p style="font-size:15px; color:var(--muted); line-height:1.7; margin:18px auto 8px; max-width:44ch;">We've received your order and a confirmation is on its way to your inbox. Welcome to the movement.</p>
+    <div style="font-size:13px; letter-spacing:.14em; margin-top:6px;">ORDER {{ orderNumber }} &nbsp;·&nbsp; {{ totalLabel }}</div>
+    <button onClick="{{ goHome }}" style="margin-top:38px; background:var(--ink); color:var(--paper); border:none; padding:17px 42px; font-size:12px; letter-spacing:.22em; cursor:pointer;">BACK TO HOME</button>
+  </main>
+  </sc-if>
+
+  <!-- ============ COLLECTIONS ============ -->
+  <sc-if value="{{ isCollections }}" hint-placeholder-val="{{ true }}">
+  <main style="min-height:70vh;">
+    <section style="max-width:1320px; margin:0 auto; padding:54px 32px 12px; text-align:center;">
+      <span style="font-size:11px; letter-spacing:.3em; color:var(--accent);">COLLECTIONS</span>
+      <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(38px,5.5vw,72px); margin:10px 0 0; line-height:1;">Shop the collections</h1>
+      <p style="color:var(--muted); font-size:14.5px; max-width:52ch; margin:18px auto 0; line-height:1.7;">Each Kalsoni collection is built around one idea — modest coverage that performs. Find the pieces made for the way you move.</p>
+    </section>
+    <section style="max-width:1320px; margin:0 auto; padding:48px 32px 90px; display:grid; grid-template-columns:repeat(2,1fr); gap:40px 32px;">
+      <sc-for list="{{ collectionsList }}" as="col" hint-placeholder-count="4">
+        <div onClick="{{ col.onShop }}" style="cursor:pointer;">
+          <div style="position:relative; aspect-ratio:5/4; overflow:hidden; background:#e7ded2;">
+            <img src="{{ col.img }}" alt="{{ col.label }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 1.1s cubic-bezier(.2,.8,.2,1);" style-hover="transform:scale(1.05);">
+            <span style="position:absolute; top:16px; right:16px; background:rgba(250,247,242,.92); font-size:10px; letter-spacing:.18em; padding:7px 12px;">{{ col.countLabel }}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-top:20px; gap:18px;">
+            <div style="flex:1;">
+              <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:30px; margin:0;">{{ col.label }}</h2>
+              <p style="font-size:13.5px; line-height:1.65; color:var(--muted); margin:8px 0 0; max-width:42ch;">{{ col.blurb }}</p>
+            </div>
+            <span style="font-size:11px; letter-spacing:.18em; border-bottom:1px solid var(--ink); padding-bottom:3px; white-space:nowrap; margin-top:6px;">SHOP →</span>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ============ CONTACT ============ -->
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ true }}">
+  <main style="max-width:1180px; margin:0 auto; padding:54px 32px 96px; min-height:70vh;">
+    <div style="text-align:center; margin-bottom:46px;">
+      <span style="font-size:11px; letter-spacing:.3em; color:var(--accent);">CONTACT</span>
+      <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(36px,5vw,66px); margin:10px 0 0;">Get in touch</h1>
+      <p style="color:var(--muted); font-size:14.5px; max-width:50ch; margin:16px auto 0; line-height:1.7;">Questions about sizing, an order, or a collaboration? We usually reply within one business day.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:1.25fr 1fr; gap:64px; align-items:start;">
+      <form onSubmit="{{ onSubmitContact }}" style="display:flex; flex-direction:column; gap:14px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <input placeholder="First name" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+          <input placeholder="Last name" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+        </div>
+        <input type="email" placeholder="Email address" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+        <select style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px; color:var(--ink); cursor:pointer;">
+          <option>What's this about?</option>
+          <option>Order &amp; shipping</option>
+          <option>Sizing &amp; fit</option>
+          <option>Returns &amp; exchanges</option>
+          <option>Wholesale &amp; partnerships</option>
+          <option>Press</option>
+          <option>Something else</option>
+        </select>
+        <textarea placeholder="Your message" rows="6" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px; resize:vertical; font-family:'Jost',sans-serif;"></textarea>
+        <button type="submit" style="align-self:flex-start; background:var(--ink); color:var(--paper); border:none; padding:16px 40px; font-size:12px; letter-spacing:.22em; cursor:pointer; margin-top:4px;">SEND MESSAGE</button>
+      </form>
+      <aside style="display:flex; flex-direction:column; gap:30px;">
+        <div>
+          <div style="font-size:11px; letter-spacing:.2em; color:var(--accent); margin-bottom:12px;">EMAIL US</div>
+          <div style="font-size:15px;">hello@kalsoni.com</div>
+          <div style="font-size:13px; color:var(--muted); margin-top:4px;">Wholesale: stockists@kalsoni.com</div>
+        </div>
+        <div>
+          <div style="font-size:11px; letter-spacing:.2em; color:var(--accent); margin-bottom:12px;">FIND US IN STORE</div>
+          <div style="font-size:13.5px; line-height:1.6;">REI Bloomington<br><span style="color:var(--muted);">750 American Blvd W, Bloomington, MN 55420</span></div>
+          <div style="font-size:13.5px; line-height:1.6; margin-top:14px;">REI Roseville<br><span style="color:var(--muted);">1955 County Road B2 W, Roseville, MN 55113</span></div>
+        </div>
+        <div>
+          <div style="font-size:11px; letter-spacing:.2em; color:var(--accent); margin-bottom:12px;">SUPPORT HOURS</div>
+          <div style="font-size:13.5px; line-height:1.7; color:var(--muted);">Mon–Fri · 9am–5pm CST<br>Replies within 1 business day</div>
+        </div>
+        <div style="display:flex; gap:18px; font-size:11px; letter-spacing:.16em;">
+          <a href="https://www.instagram.com/kalsoniapparel/">INSTAGRAM</a><a href="https://www.facebook.com/kalsoniapparel/">FACEBOOK</a><a href="https://www.linkedin.com/company/kalsoni/">LINKEDIN</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ============ WHOLESALE ============ -->
+  <sc-if value="{{ isWholesale }}" hint-placeholder-val="{{ true }}">
+  <main style="min-height:70vh;">
+    <section style="background:var(--ink); color:var(--paper);">
+      <div style="max-width:1320px; margin:0 auto; padding:84px 32px; display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:center;">
+        <div>
+          <span style="font-size:11px; letter-spacing:.3em; color:var(--accent);">WHOLESALE &amp; PARTNERSHIPS</span>
+          <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(40px,5vw,76px); line-height:1.02; margin:14px 0 0;">Stock Kalsoni</h1>
+          <p style="font-size:15.5px; line-height:1.8; color:rgba(250,247,242,.72); margin:24px 0 34px; max-width:46ch;">Bring inclusive, high-performance modest activewear to your customers. We partner with retailers, gyms and studios who believe every woman deserves to move with confidence.</p>
+          <a href="#wholesale-form" style="display:inline-block; background:var(--paper); color:var(--ink); border:none; padding:16px 38px; font-size:12px; letter-spacing:.22em; cursor:pointer;">BECOME A STOCKIST</a>
+        </div>
+        <div style="aspect-ratio:4/5; overflow:hidden; background:#2a2520;"><img src="{{ storyImg }}" alt="Kalsoni wholesale" loading="lazy" style="width:100%; height:100%; object-fit:cover;"></div>
+      </div>
+    </section>
+
+    <section style="max-width:1320px; margin:0 auto; padding:70px 32px; display:grid; grid-template-columns:repeat(4,1fr); gap:34px; border-bottom:1px solid var(--line);">
+      <div><div style="font-size:11px; letter-spacing:.26em; color:var(--accent); margin-bottom:12px;">LOW MINIMUMS</div><div style="font-size:14px; letter-spacing:.1em; margin-bottom:8px;">START SMALL</div><p style="font-size:13.5px; line-height:1.6; color:var(--muted); margin:0;">Opening orders from just 12 units per style. Test the range with low risk.</p></div>
+      <div><div style="font-size:11px; letter-spacing:.26em; color:var(--accent); margin-bottom:12px;">FAST LEAD TIMES</div><div style="font-size:14px; letter-spacing:.1em; margin-bottom:8px;">2–4 WEEKS</div><p style="font-size:13.5px; line-height:1.6; color:var(--muted); margin:0;">Reliable restocks on core styles so your shelves stay full.</p></div>
+      <div><div style="font-size:11px; letter-spacing:.26em; color:var(--accent); margin-bottom:12px;">HEALTHY MARGINS</div><div style="font-size:14px; letter-spacing:.1em; margin-bottom:8px;">KEYSTONE+</div><p style="font-size:13.5px; line-height:1.6; color:var(--muted); margin:0;">Standard wholesale pricing with strong recommended retail margins.</p></div>
+      <div><div style="font-size:11px; letter-spacing:.26em; color:var(--accent); margin-bottom:12px;">MARKETING SUPPORT</div><div style="font-size:14px; letter-spacing:.1em; margin-bottom:8px;">ASSETS + CO-OP</div><p style="font-size:13.5px; line-height:1.6; color:var(--muted); margin:0;">Photography, line sheets and campaign assets to help you sell.</p></div>
+    </section>
+
+    <section style="max-width:1320px; margin:0 auto; padding:40px 32px; text-align:center;">
+      <div style="font-size:11px; letter-spacing:.24em; color:var(--muted);">ALREADY STOCKED AT&nbsp;&nbsp; REI CO-OP&nbsp;&nbsp;·&nbsp;&nbsp;FOUNDED OUTDOORS&nbsp;&nbsp;·&nbsp;&nbsp;TARGET × ADIDAS&nbsp;&nbsp;·&nbsp;&nbsp;PATH AHEAD VENTURES</div>
+    </section>
+
+    <section id="wholesale-form" style="background:#f1ece3; border-top:1px solid var(--line);">
+      <div style="max-width:760px; margin:0 auto; padding:70px 32px;">
+        <div style="text-align:center; margin-bottom:36px;">
+          <span style="font-size:11px; letter-spacing:.3em; color:var(--accent);">APPLICATION</span>
+          <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(30px,3.8vw,48px); margin:10px 0 0;">Apply to wholesale</h2>
+          <p style="color:var(--muted); font-size:14px; margin:14px auto 0; max-width:44ch; line-height:1.6;">Tell us about your store and we'll send our full line sheet and terms.</p>
+        </div>
+        <form onSubmit="{{ onSubmitWholesale }}" style="display:flex; flex-direction:column; gap:12px;">
+          <input placeholder="Business / store name" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <input placeholder="Contact name" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+            <input type="email" placeholder="Email address" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <input placeholder="City, Country" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+            <input placeholder="Website / Instagram" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px;">
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <select style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px; color:var(--ink); cursor:pointer;">
+              <option>Retailer type</option><option>Boutique</option><option>Department store</option><option>Gym / Studio</option><option>Online retailer</option><option>Other</option>
+            </select>
+            <select style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px; color:var(--ink); cursor:pointer;">
+              <option>Estimated opening order</option><option>$500 – $2,000</option><option>$2,000 – $5,000</option><option>$5,000 – $15,000</option><option>$15,000+</option>
+            </select>
+          </div>
+          <textarea placeholder="Tell us a little about your store and customers" rows="5" style="border:1px solid var(--line2); background:var(--card); padding:15px 16px; font-size:14px; resize:vertical; font-family:'Jost',sans-serif;"></textarea>
+          <button type="submit" style="background:var(--ink); color:var(--paper); border:none; padding:17px; font-size:12px; letter-spacing:.24em; cursor:pointer; margin-top:4px;">SUBMIT APPLICATION</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- FOOTER -->
+  <footer id="footer" style="background:var(--ink); color:var(--paper); margin-top:0;">
+    <div style="max-width:1320px; margin:0 auto; padding:72px 32px 30px;">
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px;">
+        <div>
+          <div style="font-size:24px; letter-spacing:.4em; font-weight:500;">KALSONI</div>
+          <p style="font-size:14px; line-height:1.7; color:rgba(250,247,242,.6); margin:20px 0 0; max-width:34ch;">Modest activewear & athleisure designed to move freely, comfortably, and with confidence.</p>
+          <div style="display:flex; gap:18px; margin-top:24px; font-size:11px; letter-spacing:.16em; color:rgba(250,247,242,.7);"><a href="https://www.instagram.com/kalsoniapparel/">INSTAGRAM</a><a href="https://www.facebook.com/kalsoniapparel/">FACEBOOK</a><a href="https://www.linkedin.com/company/kalsoni/">LINKEDIN</a></div>
+        </div>
+        <div><div style="font-size:11px; letter-spacing:.2em; color:rgba(250,247,242,.5); margin-bottom:18px;">HELP</div><div style="display:flex; flex-direction:column; align-items:flex-start; gap:11px; font-size:13px; color:rgba(250,247,242,.8);"><button onClick="{{ openSizeGuide }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;font-size:13px;font-family:inherit;">Size Guide</button><button onClick="{{ goContact }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;font-size:13px;font-family:inherit;">FAQ</button><button onClick="{{ goContact }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;font-size:13px;font-family:inherit;">Contact Us</button><button onClick="{{ goShop }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;font-size:13px;font-family:inherit;">Our Fabric</button><button onClick="{{ goCollections }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;font-size:13px;font-family:inherit;">Collections</button></div></div>
+        <div><div style="font-size:11px; letter-spacing:.2em; color:rgba(250,247,242,.5); margin-bottom:18px;">ABOUT</div><div style="display:flex; flex-direction:column; align-items:flex-start; gap:11px; font-size:13px; color:rgba(250,247,242,.8);"><button onClick="{{ goAbout }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;font-size:13px;font-family:inherit;">Who We Are</button><button onClick="{{ goWholesale }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;font-size:13px;font-family:inherit;">Wholesale</button><button onClick="{{ goContact }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;font-size:13px;font-family:inherit;">Send Feedback</button><button onClick="{{ goShop }}" style="background:none;border:none;padding:0;cursor:pointer;color:inherit;font-size:13px;font-family:inherit;">Shop All</button></div></div>
+        <div><div style="font-size:11px; letter-spacing:.2em; color:rgba(250,247,242,.5); margin-bottom:18px;">FLAGSHIP STORES</div><div style="font-size:12.5px; line-height:1.6; color:rgba(250,247,242,.8);">REI Bloomington<br><span style="color:rgba(250,247,242,.5);">750 American Blvd W, MN 55420</span><br><br>REI Roseville<br><span style="color:rgba(250,247,242,.5);">1955 County Road B2 W, MN 55113</span></div></div>
+      </div>
+      <div style="border-top:1px solid rgba(250,247,242,.14); margin-top:50px; padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:11px; letter-spacing:.1em; color:rgba(250,247,242,.5);"><span>© 2026 KALSONI. ALL RIGHTS RESERVED.</span><span style="display:flex; gap:22px;"><a href="#">PRIVACY POLICY</a><a href="#">TERMS OF SERVICE</a></span></div>
+    </div>
+  </footer>
+
+  <!-- SEARCH OVERLAY -->
+  <sc-if value="{{ searchOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeSearch }}" style="position:fixed; inset:0; z-index:60; background:rgba(20,18,15,.4); animation:kfadein .2s ease;"></div>
+    <div style="position:fixed; top:0; left:0; right:0; z-index:61; background:var(--paper); animation:kdrop .28s cubic-bezier(.2,.8,.2,1); box-shadow:0 20px 50px rgba(0,0,0,.12);">
+      <div style="max-width:780px; margin:0 auto; padding:46px 32px;">
+        <div style="display:flex; align-items:center; gap:16px; border-bottom:1px solid var(--ink); padding-bottom:14px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+          <input autofocus value="{{ query }}" onInput="{{ onQuery }}" placeholder="Search activewear, hijabs, jackets…" style="flex:1; border:none; background:none; font-size:20px; font-family:'Cormorant Garamond',serif; padding:4px 0;">
+          <button onClick="{{ closeSearch }}" style="background:none; border:none; cursor:pointer; font-size:12px; letter-spacing:.16em; color:var(--muted);">CLOSE</button>
+        </div>
+        <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:24px; display:flex; flex-direction:column; gap:4px;">
+            <sc-for list="{{ searchResults }}" as="r" hint-placeholder-count="3">
+              <div onClick="{{ r.onView }}" style="display:flex; align-items:center; gap:16px; padding:11px 8px; cursor:pointer; border-radius:2px;" style-hover="background:#f1ece3;">
+                <div style="width:46px; height:58px; background:#efe9df; overflow:hidden; flex:none;"><img src="{{ r.img }}" alt="{{ r.name }}" style="width:100%;height:100%;object-fit:cover;"></div>
+                <div style="flex:1;"><div style="font-size:14px;">{{ r.name }}</div><div style="font-size:11px; letter-spacing:.12em; color:var(--muted); margin-top:3px;">{{ r.categoryLabel }}</div></div>
+                <div style="font-size:13px;">{{ r.priceLabel }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}"><div style="margin-top:24px; font-size:14px; color:var(--muted);">No results for "{{ query }}". Try "hijab", "jacket" or "top".</div></sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- CART DRAWER -->
+  <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCart }}" style="position:fixed; inset:0; z-index:70; background:rgba(20,18,15,.45); animation:kfadein .25s ease;"></div>
+    <aside style="position:fixed; top:0; right:0; bottom:0; z-index:71; width:min(440px,92vw); background:var(--paper); display:flex; flex-direction:column; animation:kdrawer .34s cubic-bezier(.2,.8,.2,1); box-shadow:-20px 0 50px rgba(0,0,0,.16);">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 28px; border-bottom:1px solid var(--line);"><span style="font-size:13px; letter-spacing:.2em;">YOUR CART ({{ cartCount }})</span><button onClick="{{ closeCart }}" style="background:none; border:none; cursor:pointer; color:inherit; display:flex;"><svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></button></div>
+
+      <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:40px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:26px; color:var(--muted);">Your cart is empty</div>
+          <button onClick="{{ closeCart }}" style="background:var(--ink); color:var(--paper); border:none; padding:15px 34px; font-size:12px; letter-spacing:.2em; cursor:pointer;">CONTINUE SHOPPING</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:16px 28px 0;">
+          <div style="font-size:11px; letter-spacing:.1em; color:var(--muted); margin-bottom:8px;">{{ freeShipLabel }}</div>
+          <div style="height:4px; background:var(--line); border-radius:4px; overflow:hidden;"><div style="height:100%; width:{{ freeShipPct }}; background:var(--accent); transition:width .4s;"></div></div>
+        </div>
+        <div style="flex:1; overflow-y:auto; padding:22px 28px; display:flex; flex-direction:column; gap:22px;">
+          <sc-for list="{{ cartItems }}" as="it" hint-placeholder-count="2">
+            <div style="display:flex; gap:16px;">
+              <div style="width:78px; height:100px; background:#efe9df; overflow:hidden; flex:none;"><img src="{{ it.img }}" alt="{{ it.name }}" style="width:100%;height:100%;object-fit:cover;"></div>
+              <div style="flex:1; display:flex; flex-direction:column;">
+                <div style="display:flex; justify-content:space-between; gap:8px;"><span style="font-size:14px;">{{ it.name }}</span><span style="font-size:13px;">{{ it.lineLabel }}</span></div>
+                <div style="font-size:11px; letter-spacing:.08em; color:var(--muted); margin-top:5px;">{{ it.meta }}</div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto;">
+                  <div style="display:flex; align-items:center; border:1px solid var(--line2);"><button onClick="{{ it.onDec }}" style="background:none; border:none; width:30px; height:32px; cursor:pointer; font-size:15px; color:inherit;">−</button><span style="width:26px; text-align:center; font-size:13px;">{{ it.qty }}</span><button onClick="{{ it.onInc }}" style="background:none; border:none; width:30px; height:32px; cursor:pointer; font-size:15px; color:inherit;">+</button></div>
+                  <button onClick="{{ it.onRemove }}" style="background:none; border:none; cursor:pointer; font-size:11px; letter-spacing:.1em; color:var(--muted); text-decoration:underline;">REMOVE</button>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="border-top:1px solid var(--line); padding:22px 28px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;"><span style="font-size:13px; letter-spacing:.12em;">SUBTOTAL</span><span style="font-size:18px;">{{ subtotalLabel }}</span></div>
+          <div style="font-size:11px; color:var(--muted); margin-bottom:16px;">Shipping & taxes calculated at checkout.</div>
+          <button onClick="{{ goCheckout }}" style="width:100%; background:var(--ink); color:var(--paper); border:none; padding:17px; font-size:12px; letter-spacing:.24em; cursor:pointer;">CHECKOUT</button>
+        </div>
+      </sc-if>
+    </aside>
+  </sc-if>
+
+  <!-- SIZE GUIDE MODAL -->
+  <sc-if value="{{ sizeGuideOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeSizeGuide }}" style="position:fixed; inset:0; z-index:80; background:rgba(20,18,15,.5); animation:kfadein .2s ease; display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div onClick="{{ stop }}" style="background:var(--paper); width:min(560px,100%); padding:38px; animation:kpop .25s ease; box-shadow:0 30px 60px rgba(0,0,0,.25);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;"><h3 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:28px; margin:0;">Size Guide</h3><button onClick="{{ closeSizeGuide }}" style="background:none; border:none; cursor:pointer; font-size:12px; letter-spacing:.14em; color:var(--muted);">CLOSE</button></div>
+        <p style="font-size:13px; color:var(--muted); line-height:1.6; margin:0 0 20px;">Measurements in inches. For a relaxed, modest fit, size up. Between sizes? Go with the larger.</p>
+        <div style="border:1px solid var(--line); font-size:13px;">
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); background:var(--ink); color:var(--paper); letter-spacing:.1em; font-size:11px;"><div style="padding:12px 14px;">SIZE</div><div style="padding:12px 14px;">BUST</div><div style="padding:12px 14px;">WAIST</div><div style="padding:12px 14px;">HIP</div></div>
+          <sc-for list="{{ sizeRows }}" as="row" hint-placeholder-count="6"><div style="display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line);"><div style="padding:11px 14px; letter-spacing:.1em;">{{ row.size }}</div><div style="padding:11px 14px; color:var(--muted);">{{ row.bust }}</div><div style="padding:11px 14px; color:var(--muted);">{{ row.waist }}</div><div style="padding:11px 14px; color:var(--muted);">{{ row.hip }}</div></div></sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- TOAST -->
+  <sc-if value="{{ toastShow }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:90; background:var(--ink); color:var(--paper); padding:15px 26px; font-size:12px; letter-spacing:.14em; animation:ktoast .3s ease; box-shadow:0 12px 30px rgba(0,0,0,.2);">{{ toastMsg }}</div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:820}}">
+class Component extends DCLogic {
+  state = {
+    route:'home', productId:'sport-hijab', cart:[], cartOpen:false, searchOpen:false,
+    query:'', sort:'featured', filter:'all', heroVariant:2,
+    pdpColor:0, pdpSize:null, pdpThumb:0, qty:1, sizeGuideOpen:false,
+    accordionOpen:0, toast:'', toastShow:false, orderNumber:null
+  };
+
+  CDN = 'https://images.squarespace-cdn.com/content/v1/6222be71457f4243db6467da/';
+  IMG = {
+    hero: this.CDN + '14a34175-8116-46df-a4be-b7dbea586440/IMG_7321.jpg?format=1800w',
+    top1: this.CDN + '1661660427715-FML5WDZWMD8YN328LUPJ/88D1A1C1-8773-47A9-861D-60BFC87189C0?format=1000w',
+    top2: this.CDN + '1661662705421-U809LZXBMMCR5AU9BCZG/A8ED9969-B6E3-4AF6-B0BC-ED23C00DB831?format=1000w',
+    hijab1: this.CDN + '1668674073405-FOXG21VMKKS87Z04C0F8/6-5958F52E-FA12-41A5-936C-6B4B7770EC11_1_105_c.jpg?format=1000w',
+    jacket: this.CDN + '1668674073500-MF888GBGYJKN4SU02W13/7-93006251-7B00-41AC-BE8B-A17C48802424_1_105_c.jpg?format=1000w',
+    shawl: this.CDN + '1668672307115-W1AEHD40WBXYK1YDPKOZ/Tula.jpeg?format=1000w',
+    blue: this.CDN + '1668673758927-R8S7VQXHXSDDV8I6GL25/2-1551C815-7784-4A04-9142-D1104AF696A1_1_105_c.jpg?format=1000w',
+    twogirls: this.CDN + 'a3f9e7ca-760e-4aba-a815-59cf0ebc9402/6531462D-B904-4E5A-BE38-FFF9ABFD35DD?format=1200w',
+    confident: this.CDN + '1661928512610-HXXNX8A99W4LE10R6HD0/image.jpg?format=1000w'
+  };
+
+  get products(){
+    if(this._products) return this._products;
+    const I = this.IMG;
+    const BK={name:'Black',hex:'#1b1b1b'}, SD={name:'Sand',hex:'#d8c7ad'}, SL={name:'Slate',hex:'#5b6470'}, CL={name:'Clay',hex:'#b26749'}, OL={name:'Olive',hex:'#6f7256'}, IV={name:'Ivory',hex:'#efe9dd'}, ST={name:'Steel',hex:'#5f7a8c'};
+    this._products = [
+      {id:'sport-hijab', name:'Performance Sport Hijab', price:38, category:'hijabs', categoryLabel:'SPORT HIJABS', img:I.blue, colors:[BK,SD,ST], sizes:['One Size'], soldOut:'', rating:4.9, reviewCount:214, isNew:true, blurb:'Our signature performance sport hijab — lightweight, breathable, and engineered to stay put through every rep, sprint and stretch. Moisture-wicking with a secure, comfortable fit.', fabric:'88% recycled polyester, 12% elastane. Moisture-wicking, four-way stretch, UPF 50+.'},
+      {id:'sport-shawl', name:'Performance Sport Shawl', price:42, category:'hijabs', categoryLabel:'SPORT HIJABS', img:I.shawl, colors:[BK,SL,CL], sizes:['One Size'], soldOut:'', rating:4.8, reviewCount:96, isNew:true, blurb:'A versatile performance shawl offering full coverage with effortless drape. Quick-drying and lightweight for high-intensity activity or all-day wear.', fabric:'90% recycled polyester, 10% elastane. Quick-dry, anti-odour finish.'},
+      {id:'signature-jacket', name:'Kalsoni Signature Jacket', price:88, category:'jackets', categoryLabel:'JACKETS', img:I.jacket, colors:[BK,SL,OL], sizes:['XS','S','M','L','XL','XXL'], soldOut:'XXL', rating:4.9, reviewCount:178, isNew:false, blurb:'The jacket that started it all. Full-length coverage, a relaxed athletic cut, and the Kalsoni wordmark across the chest. Studio to street, built to move.', fabric:'82% nylon, 18% elastane. Brushed interior, four-way stretch, water-resistant.'},
+      {id:'sidezip-jacket', name:'Side-Zip Active Jacket', price:84, category:'jackets', categoryLabel:'JACKETS', img:I.hijab1, colors:[BK,SD,SL], sizes:['XS','S','M','L','XL','XXL'], soldOut:'XS', rating:4.7, reviewCount:64, isNew:false, blurb:'Clean lines, hidden side zips for easy layering, and a longline silhouette for full coverage. A modern essential for cooler training days.', fabric:'80% recycled nylon, 20% elastane. Wind-resistant, breathable.'},
+      {id:'fulllength-top', name:'Full-Length Modest Top', price:58, category:'tops', categoryLabel:'TOPS', img:I.top1, colors:[BK,IV,CL], sizes:['XS','S','M','L','XL','XXL'], soldOut:'', rating:4.8, reviewCount:142, isNew:false, blurb:'A full-length, long-sleeve top with thumbholes and a high neck for complete coverage that never restricts. Layer it or wear it solo.', fabric:'92% recycled polyester, 8% elastane. Soft-touch, breathable knit.'},
+      {id:'everyday-tee', name:'Everyday Modest Tee', price:44, category:'tops', categoryLabel:'TOPS', img:I.top2, colors:[BK,IV,SD,OL], sizes:['XS','S','M','L','XL','XXL'], soldOut:'', rating:4.9, reviewCount:201, isNew:true, blurb:'The do-everything tee — relaxed through the body, longline hem, three-quarter coverage sleeves. Buttery soft and endlessly wearable.', fabric:'95% organic cotton, 5% elastane. Pre-shrunk, breathable.'},
+      {id:'motion-leggings', name:'Motion Modest Leggings', price:64, category:'leggings', categoryLabel:'LEGGINGS', img:I.confident, colors:[BK,SL,OL], sizes:['XS','S','M','L','XL','XXL'], soldOut:'', rating:4.9, reviewCount:188, isNew:false, blurb:'High-waisted, squat-proof and sculpting, with a wide supportive waistband. Full-length opacity you can trust through any movement.', fabric:'76% recycled nylon, 24% elastane. Squat-proof, four-way stretch.'},
+      {id:'movement-set', name:'The Movement Set', price:138, category:'sets', categoryLabel:'SETS', img:I.twogirls, colors:[BK,SL,CL], sizes:['XS','S','M','L','XL','XXL'], soldOut:'', rating:5.0, reviewCount:73, isNew:true, blurb:'Our coordinated two-piece — the Full-Length Top paired with Motion Leggings. A complete modest look, ready to move from sunrise workouts to errands.', fabric:'Matched performance knit. Moisture-wicking, four-way stretch.'}
+    ];
+    return this._products;
+  }
+
+  reviews = [
+    {name:'Hodan A.', date:'MAY 2026', title:'Stays put, finally', body:'I have tried every "sport hijab" out there. This is the only one that does not shift mid-run. Breathable and so light I forget I am wearing it.'},
+    {name:'Maryam K.', date:'APR 2026', title:'Coverage and comfort', body:'The coverage is exactly what I needed and the fabric is genuinely high performance. Wore it for a HIIT class and stayed cool the whole time.'},
+    {name:'Iqra D.', date:'MAR 2026', title:'Worth every penny', body:'Beautifully made, true to size, and the colour is gorgeous. You can tell it was designed by someone who actually trains in modest wear.'}
+  ];
+
+  sizeRows = [
+    {size:'XS', bust:'31–32', waist:'24–25', hip:'34–35'},
+    {size:'S', bust:'33–34', waist:'26–27', hip:'36–37'},
+    {size:'M', bust:'35–36', waist:'28–29', hip:'38–39'},
+    {size:'L', bust:'37–39', waist:'30–32', hip:'40–42'},
+    {size:'XL', bust:'40–42', waist:'33–35', hip:'43–45'},
+    {size:'XXL', bust:'43–45', waist:'36–38', hip:'46–48'}
+  ];
+
+  money = (n) => '$' + Number(n).toFixed(2);
+  getProduct = (id) => this.products.find(p => p.id === id) || this.products[0];
+
+  scrollTop = () => { try { window.scrollTo(0,0); } catch(e){} };
+
+  go = (route, id) => {
+    this.setState(s => ({ route, productId: id != null ? id : s.productId, cartOpen:false, searchOpen:false, sizeGuideOpen:false, pdpColor:0, pdpSize:null, pdpThumb:0, qty:1, accordionOpen:0 }));
+    this.scrollTop();
+  };
+  goHome = () => this.go('home');
+  goShop = () => { this.setState({ route:'shop', filter:'all', cartOpen:false, searchOpen:false }); this.scrollTop(); };
+  goCheckout = () => { this.setState({ route:'checkout', cartOpen:false }); this.scrollTop(); };
+  openProduct = (id) => this.go('product', id);
+  scrollToId = (id) => { const el = document.getElementById(id); if(el){ const y = el.getBoundingClientRect().top + window.scrollY - 80; window.scrollTo({ top:y, behavior:'smooth' }); } };
+  goAbout = () => { if(this.state.route!=='home'){ this.setState({route:'home',cartOpen:false,searchOpen:false}); setTimeout(()=>this.scrollToId('about-section'),60);} else { this.scrollToId('about-section'); } };
+  goContact = () => { this.setState({ route:'contact', cartOpen:false, searchOpen:false }); this.scrollTop(); };
+  goCollections = () => { this.setState({ route:'collections', cartOpen:false, searchOpen:false }); this.scrollTop(); };
+  goWholesale = () => { this.setState({ route:'wholesale', cartOpen:false, searchOpen:false }); this.scrollTop(); };
+  goShopCat = (cat) => { this.setState({ route:'shop', filter:cat, cartOpen:false, searchOpen:false }); this.scrollTop(); };
+  onSubmitContact = (e) => { if(e && e.preventDefault) e.preventDefault(); this.showToast("MESSAGE SENT — WE'LL BE IN TOUCH"); };
+  onSubmitWholesale = (e) => { if(e && e.preventDefault) e.preventDefault(); this.showToast('APPLICATION RECEIVED — THANK YOU'); };
+
+  setHero = (n) => this.setState({ heroVariant:n });
+  openCart = () => this.setState({ cartOpen:true, searchOpen:false });
+  closeCart = () => this.setState({ cartOpen:false });
+  openSearch = () => this.setState({ searchOpen:true, cartOpen:false });
+  closeSearch = () => this.setState({ searchOpen:false });
+  onQuery = (e) => this.setState({ query: e.target.value });
+  openSizeGuide = () => this.setState({ sizeGuideOpen:true });
+  closeSizeGuide = () => this.setState({ sizeGuideOpen:false });
+  stop = (e) => { if(e && e.stopPropagation) e.stopPropagation(); };
+  onSort = (e) => this.setState({ sort: e.target.value });
+  setFilter = (f) => this.setState({ filter:f });
+
+  incQty = () => this.setState(s => ({ qty: s.qty + 1 }));
+  decQty = () => this.setState(s => ({ qty: Math.max(1, s.qty - 1) }));
+
+  showToast = (msg) => {
+    this.setState({ toast:msg, toastShow:true });
+    clearTimeout(this._toastT);
+    this._toastT = setTimeout(() => this.setState({ toastShow:false }), 2400);
+  };
+
+  addLine = (p, colorIdx, size, qty, openDrawer) => {
+    const c = p.colors[colorIdx] || p.colors[0];
+    this.setState(s => {
+      const cart = s.cart.map(x => ({ ...x }));
+      const found = cart.find(x => x.id === p.id && x.colorName === c.name && x.size === size);
+      if(found) found.qty += qty;
+      else cart.push({ id:p.id, name:p.name, price:p.price, colorName:c.name, colorHex:c.hex, size, qty, img:p.img });
+      return { cart, cartOpen: openDrawer ? true : s.cartOpen };
+    });
+  };
+
+  quickAdd = (p, e) => {
+    if(e && e.stopPropagation) e.stopPropagation();
+    const size = p.sizes.find(s => s !== p.soldOut) || p.sizes[0];
+    this.addLine(p, 0, size, 1, true);
+  };
+
+  pdpAdd = () => {
+    const p = this.getProduct(this.state.productId);
+    if(!this.state.pdpSize){ this.showToast('PLEASE SELECT A SIZE'); return; }
+    this.addLine(p, this.state.pdpColor, this.state.pdpSize, this.state.qty, true);
+    this.showToast('ADDED TO CART');
+  };
+
+  changeQty = (idx, delta) => this.setState(s => {
+    const cart = s.cart.map(x => ({ ...x }));
+    cart[idx].qty += delta;
+    if(cart[idx].qty <= 0) cart.splice(idx, 1);
+    return { cart };
+  });
+  removeItem = (idx) => this.setState(s => { const cart = s.cart.slice(); cart.splice(idx,1); return { cart }; });
+
+  onPlaceOrder = (e) => {
+    if(e && e.preventDefault) e.preventDefault();
+    if(this.state.cart.length === 0){ this.goShop(); return; }
+    const num = 'KSN-' + Math.floor(100000 + Math.random()*900000);
+    this.setState({ route:'confirmed', orderNumber:num, cartOpen:false });
+    this.scrollTop();
+  };
+
+  mapCard = (p) => ({
+    id:p.id, name:p.name, categoryLabel:p.categoryLabel, priceLabel:this.money(p.price),
+    img:p.img, isNew:p.isNew, colorDots:p.colors.map(c => ({ hex:c.hex })),
+    onView: () => this.openProduct(p.id),
+    onQuickAdd: (e) => this.quickAdd(p, e)
+  });
+
+  renderVals() {
+    const s = this.state;
+    const route = s.route;
+    const prods = this.products;
+
+    // shop filter + sort
+    let list = prods.filter(p => s.filter === 'all' || p.category === s.filter);
+    list = list.slice();
+    if(s.sort === 'price-asc') list.sort((a,b) => a.price - b.price);
+    else if(s.sort === 'price-desc') list.sort((a,b) => b.price - a.price);
+    else if(s.sort === 'newest') list.sort((a,b) => (b.isNew?1:0) - (a.isNew?1:0));
+
+    const filters = [
+      ['All','all'],['Sport Hijabs','hijabs'],['Tops','tops'],['Jackets','jackets'],['Leggings','leggings'],['Sets','sets']
+    ];
+    const pillBase = 'padding:9px 16px; font-size:11px; letter-spacing:.14em; cursor:pointer; border-radius:999px; transition:.2s;';
+    const filterPills = filters.map(([label,value]) => ({
+      label, onClick: () => this.setFilter(value),
+      style: pillBase + (s.filter === value ? 'background:#16130f; color:#faf7f2; border:1px solid #16130f;' : 'background:transparent; color:#16130f; border:1px solid #d8d0c2;')
+    }));
+
+    // PDP
+    const p = this.getProduct(s.productId);
+    const gallery = [p.img, ...prods.filter(x => x.id !== p.id).slice(0,2).map(x => x.img)];
+    const thumbIdx = Math.min(s.pdpThumb, gallery.length - 1);
+    const activeColor = p.colors[s.pdpColor] || p.colors[0];
+    const accItems = [
+      { title:'DETAILS & FIT', body: p.blurb + ' Designed for a modest, relaxed fit — true to size with full coverage.' },
+      { title:'FABRIC & CARE', body: p.fabric + ' Machine wash cold, hang to dry. Do not bleach or iron print.' },
+      { title:'SHIPPING & RETURNS', body:'Free standard shipping on orders over $75. 30-day easy returns on unworn items with tags attached.' }
+    ];
+    const related = prods.filter(x => x.id !== p.id);
+    const sameCat = related.filter(x => x.category === p.category);
+    const relList = [...sameCat, ...related.filter(x => x.category !== p.category)].slice(0,4);
+
+    const sizeBase = 'min-width:54px; height:46px; padding:0 14px; font-size:12px; letter-spacing:.08em; cursor:pointer; background:transparent;';
+    const pdp = {
+      categoryLabel:p.categoryLabel, name:p.name, priceLabel:this.money(p.price),
+      ratingLabel:p.rating.toFixed(1), reviewCount:p.reviewCount, blurb:p.blurb,
+      mainImg: gallery[thumbIdx], activeColorName: activeColor.name,
+      thumbs: gallery.map((img,i) => ({ img, onSelect: () => this.setState({ pdpThumb:i }), border: i === thumbIdx ? '#16130f' : '#e7e0d4' })),
+      colors: p.colors.map((c,i) => ({ name:c.name, hex:c.hex, onSelect: () => this.setState({ pdpColor:i }), outline: i === s.pdpColor ? '1px solid #16130f' : 'none' })),
+      sizes: p.sizes.map(label => {
+        const soldOut = label === p.soldOut;
+        const active = label === s.pdpSize;
+        return { label, disabled: soldOut,
+          onSelect: soldOut ? (()=>{}) : (() => this.setState({ pdpSize:label })),
+          style: sizeBase + (soldOut ? 'border:1px solid #e7e0d4; color:#c3bcb0; text-decoration:line-through; cursor:not-allowed;' : (active ? 'border:1px solid #16130f; background:#16130f; color:#faf7f2;' : 'border:1px solid #d8d0c2; color:#16130f;')) };
+      }),
+      accordion: accItems.map((a,i) => ({ title:a.title, body:a.body, open: s.accordionOpen === i, sign: s.accordionOpen === i ? '−' : '+', onToggle: () => this.setState(st => ({ accordionOpen: st.accordionOpen === i ? -1 : i })) })),
+      reviews: this.reviews,
+      related: relList.map(this.mapCard)
+    };
+
+    // cart
+    const cartItems = s.cart.map((it,idx) => ({
+      name:it.name, img:it.img, qty:it.qty, meta: it.colorName + ' / ' + it.size,
+      lineLabel:this.money(it.price * it.qty),
+      onInc: () => this.changeQty(idx,1), onDec: () => this.changeQty(idx,-1), onRemove: () => this.removeItem(idx)
+    }));
+    const cartCount = s.cart.reduce((n,it) => n + it.qty, 0);
+    const subtotal = s.cart.reduce((n,it) => n + it.price * it.qty, 0);
+    const remaining = Math.max(0, 75 - subtotal);
+    const shipping = (subtotal >= 75 || subtotal === 0) ? 0 : 6.95;
+    const total = subtotal + shipping;
+
+    // search
+    const q = s.query.trim().toLowerCase();
+    const sr = q ? prods.filter(x => (x.name + ' ' + x.categoryLabel).toLowerCase().includes(q)) : [];
+
+    return {
+      isHome: route === 'home', isShop: route === 'shop', isProduct: route === 'product',
+      isCheckout: route === 'checkout', isConfirmed: route === 'confirmed',
+      isCollections: route === 'collections', isContact: route === 'contact', isWholesale: route === 'wholesale',
+      goCollections:this.goCollections, goWholesale:this.goWholesale, onSubmitContact:this.onSubmitContact, onSubmitWholesale:this.onSubmitWholesale,
+      collectionsList: [
+        ['Sport Hijabs','hijabs','Engineered to stay put — lightweight, breathable coverage for every workout.'],
+        ['Tops','tops','Full-coverage tops and tees that move with you, from studio to street.'],
+        ['Jackets','jackets','Longline, layered silhouettes in performance fabric with modest cuts.'],
+        ['Leggings','leggings','High-waisted, squat-proof and sculpting, with total opacity you can trust.'],
+        ['Sets','sets','Coordinated two-piece looks, ready to move from sunrise to sundown.']
+      ].map(([label,cat,blurb]) => { const items = prods.filter(x => x.category === cat); return { label, blurb, img: (items[0]||prods[0]).img, countLabel: items.length + (items.length===1?' style':' styles'), onShop: () => this.goShopCat(cat) }; }),
+      isHero1: s.heroVariant === 1, isHero2: s.heroVariant === 2, isHero3: s.heroVariant === 3,
+      goHome:this.goHome, goShop:this.goShop, goAbout:this.goAbout, goContact:this.goContact, goCheckout:this.goCheckout,
+      openCart:this.openCart, closeCart:this.closeCart, openSearch:this.openSearch, closeSearch:this.closeSearch,
+      openSizeGuide:this.openSizeGuide, closeSizeGuide:this.closeSizeGuide, stop:this.stop,
+      onSort:this.onSort, onQuery:this.onQuery, onPlaceOrder:this.onPlaceOrder,
+      incQty:this.incQty, decQty:this.decQty, pdpAdd:this.pdpAdd, qty:s.qty,
+
+      heroImg:this.IMG.hero, storyImg:this.IMG.confident, communityImg:this.IMG.twogirls,
+      heroDots: [1,2,3].map(n => ({ label: String(n), onClick: () => this.setHero(n),
+        style: 'width:24px; height:24px; border-radius:50%; cursor:pointer; font-size:11px; border:none; ' + (s.heroVariant === n ? 'background:#b26749; color:#fff;' : 'background:rgba(255,255,255,.16); color:#faf7f2;') })),
+
+      featured: prods.slice(0,4).map(this.mapCard),
+      homeCategories: [
+        { label:'Sport Hijabs', img:this.IMG.blue, onClick: () => { this.setState({ route:'shop', filter:'hijabs' }); this.scrollTop(); } },
+        { label:'Tops', img:this.IMG.top1, onClick: () => { this.setState({ route:'shop', filter:'tops' }); this.scrollTop(); } },
+        { label:'Jackets', img:this.IMG.jacket, onClick: () => { this.setState({ route:'shop', filter:'jackets' }); this.scrollTop(); } }
+      ],
+      igImages: [this.IMG.blue, this.IMG.top2, this.IMG.hijab1, this.IMG.confident],
+
+      filterPills, sortValue:s.sort, displayProducts: list.map(this.mapCard),
+      resultLabel: list.length + (list.length === 1 ? ' STYLE' : ' STYLES'),
+
+      pdp,
+
+      cartItems, cartCount, cartHasItems: cartCount > 0, cartEmpty: cartCount === 0,
+      cartOpen:s.cartOpen, subtotalLabel:this.money(subtotal),
+      freeShipLabel: remaining > 0 ? ("You're " + this.money(remaining) + ' away from free shipping') : "You've unlocked free shipping",
+      freeShipPct: Math.min(100, subtotal / 75 * 100) + '%',
+      shipLabel: shipping === 0 ? 'FREE' : this.money(shipping),
+      totalLabel:this.money(total),
+
+      searchOpen:s.searchOpen, query:s.query,
+      searchResults: sr.map(this.mapCard), hasResults: sr.length > 0, noResults: q.length > 0 && sr.length === 0,
+
+      sizeGuideOpen:s.sizeGuideOpen, sizeRows:this.sizeRows,
+      orderNumber:s.orderNumber,
+      toastShow:s.toastShow, toastMsg:s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>
