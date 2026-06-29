@@ -1,0 +1,7 @@
+# Kalsoni — static multi-page mockup, no build step.
+# Publishes the v2 folder directly. This overrides the Netlify UI
+# "Publish directory" setting (which was pointing at a pasted GitHub
+# URL path, causing "Deploy directory ... does not exist").
+[build]
+  publish = "kalsoni-mockup-v2"
+  command = "echo 'static site — nothing to build'"
