@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout — Kalsoni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favico.png">
+  <link rel="apple-touch-icon" href="assets/favico.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="checkout">
+
+  <main class="page-main">
+    <div id="checkout" class="checkout-wrap">
+
+      <div id="checkout-head">
+        <a class="checkout-back" href="shop.html">← CONTINUE SHOPPING</a>
+        <h1>Checkout</h1>
+      </div>
+
+      <div id="checkout-grid" class="checkout-grid">
+        <form id="checkout-form" class="checkout-form">
+          <div class="field-group">
+            <div class="field-group__title">01 — CONTACT</div>
+            <input class="input" type="email" placeholder="Email address" required>
+          </div>
+          <div class="field-group">
+            <div class="field-group__title">02 — SHIPPING ADDRESS</div>
+            <div class="grid-2">
+              <input class="input" placeholder="First name" required>
+              <input class="input" placeholder="Last name" required>
+              <input class="input span-2" placeholder="Address" required>
+              <input class="input" placeholder="City" required>
+              <input class="input" placeholder="ZIP / Postal code" required>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field-group__title">03 — DELIVERY</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <label class="radio-row is-active"><span class="left"><span class="radio-dot"></span>Standard · 3–5 business days</span><span id="summary-ship-pill">FREE</span></label>
+              <label class="radio-row is-muted"><span class="left"><span class="radio-dot radio-dot--empty"></span>Express · 1–2 business days</span><span>$14.95</span></label>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field-group__title">04 — PAYMENT</div>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <input class="input" placeholder="Card number" required>
+              <div class="grid-2"><input class="input" placeholder="MM / YY" required><input class="input" placeholder="CVC" required></div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--solid">PLACE ORDER — <span class="totallabel"></span></button>
+        </form>
+
+        <aside class="summary">
+          <div class="summary__title">ORDER SUMMARY</div>
+          <div id="summary-items" class="summary__items"><!-- items --></div>
+          <div class="summary__totals">
+            <div class="summary__row"><span>Subtotal</span><span id="summary-sub"></span></div>
+            <div class="summary__row"><span>Shipping</span><span id="summary-ship"></span></div>
+            <div class="summary__row summary__row--total"><span>Total</span><span id="summary-total"></span></div>
+          </div>
+        </aside>
+      </div>
+
+      <section id="confirmation" class="confirmation" hidden>
+        <div class="confirmation__check">✓</div>
+        <span class="eyebrow">ORDER CONFIRMED</span>
+        <h1>Thank you, you're set</h1>
+        <p>We've received your order and a confirmation is on its way to your inbox. Welcome to the movement.</p>
+        <div class="confirmation__order">ORDER <span id="conf-number"></span> &nbsp;·&nbsp; <span id="conf-total"></span></div>
+        <a class="btn btn--solid" href="index.html" style="margin-top:38px;">BACK TO HOME</a>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

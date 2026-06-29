@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Kalsoni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favico.png">
+  <link rel="apple-touch-icon" href="assets/favico.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="contact">
+
+  <main class="page-main">
+    <div class="page-head">
+      <span class="eyebrow">CONTACT</span>
+      <h1>Get in touch</h1>
+      <p>Questions about sizing, an order, or a collaboration? We usually reply within one business day.</p>
+    </div>
+
+    <div class="contact-wrap">
+      <div class="contact-grid">
+        <form class="contact-form" data-toast-form="MESSAGE SENT — WE'LL BE IN TOUCH">
+          <div class="grid-2">
+            <input class="input" placeholder="First name" required>
+            <input class="input" placeholder="Last name" required>
+          </div>
+          <input class="input" type="email" placeholder="Email address" required>
+          <select class="select">
+            <option>What's this about?</option>
+            <option>Order &amp; shipping</option>
+            <option>Sizing &amp; fit</option>
+            <option>Returns &amp; exchanges</option>
+            <option>Wholesale &amp; partnerships</option>
+            <option>Press</option>
+            <option>Something else</option>
+          </select>
+          <textarea class="textarea" placeholder="Your message" rows="6" required></textarea>
+          <button type="submit" class="btn btn--solid" style="align-self:flex-start; margin-top:4px;">SEND MESSAGE</button>
+        </form>
+
+        <aside class="contact-aside">
+          <div>
+            <div class="contact-aside__label">EMAIL US</div>
+            <div class="contact-aside__big">hello@kalsoni.com</div>
+            <div class="contact-aside__sub">Wholesale: stockists@kalsoni.com</div>
+          </div>
+          <div>
+            <div class="contact-aside__label">FIND US IN STORE</div>
+            <div class="contact-aside__addr">REI Bloomington<br><span>750 American Blvd W, Bloomington, MN 55420</span></div>
+            <div class="contact-aside__addr" style="margin-top:14px;">REI Roseville<br><span>1955 County Road B2 W, Roseville, MN 55113</span></div>
+          </div>
+          <div>
+            <div class="contact-aside__label">SUPPORT HOURS</div>
+            <div class="contact-aside__hours">Mon–Fri · 9am–5pm CST<br>Replies within 1 business day</div>
+          </div>
+          <div class="contact-aside__social">
+            <a href="https://www.instagram.com/kalsoniapparel/">INSTAGRAM</a>
+            <a href="https://www.facebook.com/kalsoniapparel/">FACEBOOK</a>
+            <a href="https://www.linkedin.com/company/kalsoni/">LINKEDIN</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
