@@ -82,6 +82,7 @@
         nav('shop.html', 'SHOP', 'shop') +
         nav('collections.html', 'COLLECTIONS', 'collections') +
         nav('lookbook.html', 'LOOKBOOK', 'lookbook') +
+        nav('blog.html', 'JOURNAL', 'journal') +
         nav('index.html#about', 'ABOUT US', 'about') +
         nav('contact.html', 'CONTACT', 'contact') +
       '</nav>' +
@@ -102,7 +103,7 @@
       '<div><div class="footer__heading">HELP</div><div class="footer__links">' +
         '<button data-open-sizeguide type="button">Size Guide</button><a href="faq.html">FAQ</a><a href="contact.html">Contact Us</a><a href="fabric.html">Our Fabric</a><a href="collections.html">Collections</a></div></div>' +
       '<div><div class="footer__heading">ABOUT</div><div class="footer__links">' +
-        '<a href="index.html#about">Who We Are</a><a href="lookbook.html">Lookbook</a><a href="wholesale.html">Wholesale</a><a href="wholesale.html#bulk">Bulk Orders (Schools &amp; Teams)</a><a href="affiliate.html">Affiliate Program</a></div></div>' +
+        '<a href="index.html#about">Who We Are</a><a href="lookbook.html">Lookbook</a><a href="blog.html">Journal</a><a href="wholesale.html">Wholesale</a><a href="wholesale.html#bulk">Bulk Orders (Schools &amp; Teams)</a><a href="affiliate.html">Affiliate Program</a></div></div>' +
       '<div><div class="footer__heading">FLAGSHIP STORES</div><div class="footer__stores">REI Bloomington<br><span>750 American Blvd W, MN 55420</span><br><br>REI Roseville<br><span>1955 County Road B2 W, MN 55113</span></div></div>' +
       '</div><div class="footer__bottom"><span>&copy; 2026 KALSONI. ALL RIGHTS RESERVED.</span>' +
       '<span class="footer__trust">' + bCorpBadge('bcorp--sm') + '</span>' +
@@ -374,13 +375,32 @@
         '<p>Every look is available now — modest coverage that performs.</p><a href="shop.html" class="btn btn--solid">SHOP ALL</a></section>';
   }
 
+  function renderJournal() {
+    var root = $('#journal');
+    if (!root) return;
+    var posts = K.journal;
+    var feat = posts[0];
+    var rest = posts.slice(1);
+    root.innerHTML =
+      '<div class="page-head"><span class="eyebrow">THE JOURNAL</span><h1>New &amp; upcoming</h1>' +
+        '<p>A first look at new drops, fresh colourways, and the stories behind the pieces.</p></div>' +
+      '<a class="journal-feat" href="product.html?id=' + feat.productId + '">' +
+        '<div class="journal-feat__media"><img src="' + feat.img + '" alt="' + esc(feat.title) + '"><span class="journal-card__kicker">' + feat.kicker + '</span></div>' +
+        '<div class="journal-feat__copy"><span class="journal-card__date">' + feat.date + '</span>' +
+        '<h2>' + esc(feat.title) + '</h2><p>' + esc(feat.excerpt) + '</p><span class="link-underline">READ MORE &rarr;</span></div></a>' +
+      '<div class="journal-grid">' + rest.map(function (po) {
+        return '<a class="journal-card" href="product.html?id=' + po.productId + '">' +
+          '<div class="journal-card__media"><img src="' + po.img + '" alt="' + esc(po.title) + '" loading="lazy"><span class="journal-card__kicker">' + po.kicker + '</span></div>' +
+          '<div class="journal-card__date">' + po.date + '</div><h3>' + esc(po.title) + '</h3><p>' + esc(po.excerpt) + '</p></a>';
+      }).join('') + '</div>';
+  }
+
   function renderProduct() {
     var root = $('#pdp');
     if (!root) return;
     var p = K.getProduct(qparam('id') || 'biftu-mid-tunic');
     document.title = p.name + ' — Kalsoni';
     var isBundle = !!p.bundle;
-    var gallery = p.gallery || [{ label: 'Front', img: p.img }];
     var lookItems = K.getMany(p.completeLook);
     var bundleItems = isBundle ? K.getMany(p.includes) : [];
     var state = { color: 0, size: null, thumb: 0, qty: 1, acc: 0 };
@@ -394,6 +414,9 @@
     var related = sameCat.concat(others.filter(function (x) { return x.category !== p.category; })).slice(0, 4);
 
     function draw() {
+      // per-colour gallery: swatch selection swaps the whole 5-shot set
+      var gallery = (p.colorGalleries && p.colorGalleries[state.color]) || p.gallery || [{ label: 'Front', img: p.img }];
+      if (state.thumb >= gallery.length) state.thumb = 0;
       var thumbs = gallery.map(function (g, i) {
         return '<button class="pdp-thumb' + (i === state.thumb ? ' is-active' : '') + '" data-thumb="' + i + '" title="' + g.label + '"><img src="' + g.img + '" alt="' + g.label + '"></button>';
       }).join('');
@@ -454,7 +477,7 @@
           }).join('') + '</div></section>' : '') +
         '<section class="pdp-reviews"><div class="pdp-reviews__head"><h2>Reviews</h2><div class="stars">' + STARS + '</div>' +
           '<div class="pdp-reviews__sub">' + p.rating.toFixed(1) + ' out of 5 · ' + p.reviewCount + ' reviews</div></div>' +
-          '<div class="pdp-reviews__list">' + K.reviews.map(function (r) {
+          '<div class="pdp-reviews__list">' + (p.reviews && p.reviews.length ? p.reviews : K.reviews).map(function (r) {
             return '<div class="review"><div class="review__top"><span class="stars">' + STARS + '</span><span class="review__date">' + r.date + '</span></div>' +
               '<div class="review__title">' + esc(r.title) + '</div><p>' + esc(r.body) + '</p><div class="review__name">' + esc(r.name) + ' · VERIFIED BUYER</div></div>';
           }).join('') + '</div></section>' +
@@ -466,7 +489,7 @@
       var b;
       if (t.closest('[data-add]')) return; // handled by global quick-add
       if ((b = t.closest('[data-thumb]'))) { state.thumb = +b.dataset.thumb; draw(); }
-      else if ((b = t.closest('[data-color]'))) { state.color = +b.dataset.color; draw(); }
+      else if ((b = t.closest('[data-color]'))) { state.color = +b.dataset.color; state.thumb = 0; draw(); }
       else if ((b = t.closest('[data-size]')) && !b.disabled) { state.size = b.dataset.size; draw(); }
       else if ((b = t.closest('[data-acc]'))) { state.acc = (state.acc === +b.dataset.acc ? -1 : +b.dataset.acc); draw(); }
       else if ((b = t.closest('[data-qty]'))) { state.qty = Math.max(1, state.qty + (+b.dataset.qty)); draw(); }
@@ -577,6 +600,7 @@
     else if (page === 'shop') renderShop();
     else if (page === 'collections') renderCollections();
     else if (page === 'lookbook') renderLookbook();
+    else if (page === 'journal') renderJournal();
     else if (page === 'product') renderProduct();
     else if (page === 'checkout') renderCheckout();
     renderForms();

@@ -29,11 +29,18 @@
 
   var FULL_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL', '5XL'];
 
-  // Build the 5-shot placeholder gallery (front, side, back, detail, flat-lay).
-  // Real photography is TBD — these labelled slots let real assets drop straight in.
-  function gallery(pool) {
+  // Per-COLOUR galleries (front, side, back, detail, flat-lay). Real photography is
+  // TBD — each colour gets its own 5-shot set from the image pool (rotated so colours
+  // look distinct) so real per-colour assets drop straight into these slots later.
+  function colorGalleries(pool, count) {
     var labels = ['Front', 'Side', 'Back', 'Detail', 'Flat-lay'];
-    return labels.map(function (label, i) { return { label: label, img: pool[i % pool.length] }; });
+    var out = [];
+    for (var ci = 0; ci < count; ci++) {
+      out.push(labels.map(function (label, i) {
+        return { label: label, img: pool[(i + ci) % pool.length] };
+      }));
+    }
+    return out;
   }
 
   var products = [
@@ -41,121 +48,173 @@
     {
       id: 'biftu-mid-tunic', name: 'Biftu Mid-Length Tunic', price: 78,
       category: 'tops', categoryLabel: 'TOPS', collection: 'The Biftu Collection',
-      img: IMG.top1, gallery: gallery([IMG.top1, IMG.top2, IMG.confident, IMG.jacket]),
+      img: IMG.top1, pool: [IMG.top1, IMG.top2, IMG.confident, IMG.jacket],
       colors: [BK, SD, SL, CL, OL], sizes: FULL_SIZES, soldOut: '5XL',
       rating: 4.9, reviewCount: 142, isNew: true, fabricTech: 'KalFlex',
       completeLook: ['wide-leg-pant', 'mako-sport-hijab'],
       blurb: 'Our signature mid-length tunic — a relaxed, fully-covering silhouette with side slits for easy movement. The cornerstone of the Biftu Collection, available in five core colours.',
-      fabric: 'KalFlex — 88% recycled polyester, 12% elastane. Soft-touch, four-way stretch, breathable knit.'
+      fabric: 'KalFlex — 88% recycled polyester, 12% elastane. Soft-touch, four-way stretch, breathable knit.',
+      reviews: [
+        { name: 'Hodan A.', date: 'MAY 2026', title: 'Covers everything, still moves', body: 'The mid-length is perfect — full coverage but I can still do a deep squat without it riding up. The fabric is buttery soft.' },
+        { name: 'Nasra Y.', date: 'APR 2026', title: 'The Sand colour is stunning', body: 'Even nicer in person. True to size and the side slits make such a difference for movement.' },
+        { name: 'Amal R.', date: 'MAR 2026', title: 'My everyday tunic', body: 'I bought one and immediately ordered two more colours. It works for the gym and for the school run.' }
+      ]
     },
     {
       id: 'biftu-full-tunic', name: 'Biftu Full-Length Tunic', price: 88,
       category: 'tops', categoryLabel: 'TOPS', collection: 'The Biftu Collection',
-      img: IMG.top2, gallery: gallery([IMG.top2, IMG.top1, IMG.twogirls, IMG.jacket]),
+      img: IMG.top2, pool: [IMG.top2, IMG.top1, IMG.twogirls, IMG.jacket],
       colors: [BK, SD, SL, IV], sizes: FULL_SIZES, soldOut: '',
       rating: 4.8, reviewCount: 96, isNew: true, fabricTech: 'KalFlex',
       completeLook: ['joggers', 'safiya-sport-hijab'],
       blurb: 'Maximum coverage, zero compromise on movement. The full-length tunic drapes to mid-thigh with a high neck and thumbhole cuffs — modest, elegant and built to perform.',
-      fabric: 'KalFlex — 88% recycled polyester, 12% elastane. Elegant drape, four-way stretch.'
+      fabric: 'KalFlex — 88% recycled polyester, 12% elastane. Elegant drape, four-way stretch.',
+      reviews: [
+        { name: 'Maryam K.', date: 'MAY 2026', title: 'Finally, full coverage that moves', body: 'It still moves with me and never feels like a tent. The thumbholes are a small detail I did not know I needed.' },
+        { name: 'Sumaya A.', date: 'FEB 2026', title: 'Flattering and breathable', body: 'Wore it through a long training session and stayed cool. The Ivory is gorgeous and not see-through at all.' }
+      ]
     },
     // ----- BOTTOMS -----
     {
       id: 'wide-leg-pant', name: 'Wide Leg Pant', price: 68,
       category: 'bottoms', categoryLabel: 'BOTTOMS', collection: 'Performance Bottoms',
-      img: IMG.confident, gallery: gallery([IMG.confident, IMG.twogirls, IMG.top1]),
+      img: IMG.confident, pool: [IMG.confident, IMG.twogirls, IMG.top1],
       colors: [BK, SL], sizes: FULL_SIZES, soldOut: '',
       rating: 4.9, reviewCount: 188, isNew: false, fabricTech: 'KalFlex',
       completeLook: ['biftu-mid-tunic', 'mako-sport-shawl'],
       blurb: 'A flowing wide-leg trouser with a high, supportive waistband and full opacity. Studio-to-street coverage that moves like activewear and reads like everyday wear.',
-      fabric: 'KalFlex — 76% recycled nylon, 24% elastane. Squat-proof, opaque, four-way stretch.'
+      fabric: 'KalFlex — 76% recycled nylon, 24% elastane. Squat-proof, opaque, four-way stretch.',
+      reviews: [
+        { name: 'Iqra D.', date: 'APR 2026', title: 'So flattering and they stay put', body: 'The waistband actually stays in place. Wore them to teach and then straight to the gym.' },
+        { name: 'Leyla H.', date: 'JAN 2026', title: 'New everyday bottoms', body: 'Opaque, comfortable, and they do not cling. I basically live in these now.' }
+      ]
     },
     {
       id: 'joggers', name: 'Joggers', price: 64,
       category: 'bottoms', categoryLabel: 'BOTTOMS', collection: 'Performance Bottoms',
-      img: IMG.jacket, gallery: gallery([IMG.jacket, IMG.confident, IMG.twogirls]),
+      img: IMG.jacket, pool: [IMG.jacket, IMG.confident, IMG.twogirls],
       colors: [BK, OL], sizes: FULL_SIZES, soldOut: 'XS',
       rating: 4.8, reviewCount: 121, isNew: false, fabricTech: 'BreezeLuxe',
       completeLook: ['biftu-full-tunic', 'mako-sport-hijab'],
       blurb: 'Tapered, cuffed joggers with a relaxed modest fit and deep side pockets. Lightweight enough to train in, soft enough to live in.',
-      fabric: 'BreezeLuxe — 80% recycled nylon, 20% elastane. Lightweight, breathable, quick-dry.'
+      fabric: 'BreezeLuxe — 80% recycled nylon, 20% elastane. Lightweight, breathable, quick-dry.',
+      reviews: [
+        { name: 'Fadumo S.', date: 'MAR 2026', title: 'Real pockets, finally', body: 'Lightweight joggers with deep pockets — perfect for travel days. Sizing was spot on.' },
+        { name: 'Zainab M.', date: 'FEB 2026', title: 'Relaxed without looking sloppy', body: 'Soft and comfy but still put-together. The Olive is a beautiful colour.' }
+      ]
     },
     // ----- SPORT HIJABS & SHAWLS — The Performance Hijab Collection -----
     {
       id: 'safiya-sport-hijab', name: 'Safiya Sport Hijab', price: 38,
       category: 'hijabs-shawls', categoryLabel: 'SPORT HIJABS & SHAWLS', collection: 'The Performance Hijab Collection',
-      img: IMG.blue, gallery: gallery([IMG.blue, IMG.hijab1, IMG.confident]),
+      img: IMG.blue, pool: [IMG.blue, IMG.hijab1, IMG.confident],
       colors: [BK], sizes: ['S/M', 'L/XL'], soldOut: '',
       rating: 4.9, reviewCount: 214, isNew: true, fabricTech: 'BreezeLuxe',
       completeLook: ['biftu-full-tunic', 'wide-leg-pant'],
       blurb: 'The Safiya — our fitted, instant-on sport hijab. Engineered to stay put through every rep, sprint and stretch, with full coverage at the neckline. Available in two sizes for the perfect fit.',
-      fabric: 'BreezeLuxe — 90% recycled polyester, 10% elastane. Moisture-wicking, four-way stretch, UPF 50+.'
+      fabric: 'BreezeLuxe — 90% recycled polyester, 10% elastane. Moisture-wicking, four-way stretch, UPF 50+.',
+      reviews: [
+        { name: 'Hodan A.', date: 'MAY 2026', title: 'Does not budge', body: 'I ran 10k and never had to readjust it once. Breathable and so light I forget it is there.' },
+        { name: 'Khadija O.', date: 'APR 2026', title: 'Two sizes is a game changer', body: 'I finally got a proper fit instead of one-size-fits-none. Full coverage at the neck too.' }
+      ]
     },
     {
       id: 'mako-sport-hijab', name: 'Mako Sport Hijab', price: 34,
       category: 'hijabs-shawls', categoryLabel: 'SPORT HIJABS & SHAWLS', collection: 'The Performance Hijab Collection',
-      img: IMG.hijab1, gallery: gallery([IMG.hijab1, IMG.blue, IMG.top2]),
+      img: IMG.hijab1, pool: [IMG.hijab1, IMG.blue, IMG.top2],
       colors: [BK, SD, ST], sizes: ['One Size'], soldOut: '',
       rating: 4.8, reviewCount: 167, isNew: true, fabricTech: 'BreezeLuxe',
       completeLook: ['biftu-mid-tunic', 'joggers'],
       blurb: 'The Mako — a lightweight, one-size sport hijab with an easy pull-on fit. Breathable, quick-drying and secure for high-intensity activity or all-day wear.',
-      fabric: 'BreezeLuxe — 90% recycled polyester, 10% elastane. Quick-dry, anti-odour, breathable.'
+      fabric: 'BreezeLuxe — 90% recycled polyester, 10% elastane. Quick-dry, anti-odour, breathable.',
+      reviews: [
+        { name: 'Sagal A.', date: 'MAY 2026', title: 'One-size that actually fits', body: 'Light enough that I forget I am wearing it during HIIT, and it stays put the whole class.' },
+        { name: 'Ayan I.', date: 'MAR 2026', title: 'Want every colour', body: 'Three tones and I already have two. Breathable and the fit is so easy.' }
+      ]
     },
     {
       id: 'safiya-sport-shawl', name: 'Safiya Sport Shawl', price: 42,
       category: 'hijabs-shawls', categoryLabel: 'SPORT HIJABS & SHAWLS', collection: 'The Performance Hijab Collection',
-      img: IMG.shawl, gallery: gallery([IMG.shawl, IMG.blue, IMG.confident]),
+      img: IMG.shawl, pool: [IMG.shawl, IMG.blue, IMG.confident],
       colors: [BK, SL, CL], sizes: ['One Size'], soldOut: '',
       rating: 4.8, reviewCount: 88, isNew: false, fabricTech: 'SolShield',
       completeLook: ['biftu-full-tunic', 'wide-leg-pant'],
       blurb: 'A versatile performance shawl offering full coverage with an effortless drape. Quick-drying, lightweight and easy to restyle from workout to everyday.',
-      fabric: 'SolShield — 90% recycled polyester, 10% elastane. UPF 50+, quick-dry, anti-odour.'
+      fabric: 'SolShield — 90% recycled polyester, 10% elastane. UPF 50+, quick-dry, anti-odour.',
+      reviews: [
+        { name: 'Munira H.', date: 'APR 2026', title: 'Beautiful drape', body: 'So easy to restyle and it goes straight from a workout to errands. Full coverage without the bulk.' },
+        { name: 'Rahma D.', date: 'JAN 2026', title: 'Exactly what I wanted', body: 'Quick-drying and lightweight. The Clay colour is even better in person.' }
+      ]
     },
     {
       id: 'mako-sport-shawl', name: 'Mako Sport Shawl', price: 40,
       category: 'hijabs-shawls', categoryLabel: 'SPORT HIJABS & SHAWLS', collection: 'The Performance Hijab Collection',
-      img: IMG.shawl, gallery: gallery([IMG.shawl, IMG.hijab1, IMG.top2]),
+      img: IMG.shawl, pool: [IMG.shawl, IMG.hijab1, IMG.top2],
       colors: [BK, SD, SL, CL], sizes: ['One Size'], soldOut: '',
       rating: 4.7, reviewCount: 74, isNew: false, fabricTech: 'SolShield',
       completeLook: ['biftu-mid-tunic', 'joggers'],
       blurb: 'The Mako shawl in four core colours — a draped, full-coverage layer that finishes any look. Soft, breathable and built for movement.',
-      fabric: 'SolShield — 90% recycled polyester, 10% elastane. UPF 50+, lightweight, breathable.'
+      fabric: 'SolShield — 90% recycled polyester, 10% elastane. UPF 50+, lightweight, breathable.',
+      reviews: [
+        { name: 'Asha M.', date: 'MAR 2026', title: 'My go-to layer', body: 'Soft, breathable and the colours are gorgeous. It does not slip around like other shawls.' },
+        { name: 'Bilan K.', date: 'FEB 2026', title: 'Worth it', body: 'Lightweight and full coverage. I reach for this one more than any other.' }
+      ]
     },
     // ----- BUNDLES (own product type, not a discount code) -----
     {
       id: 'complete-set', name: 'The Complete Set', price: 178,
       category: 'bundles', categoryLabel: 'BUNDLES', collection: 'Curated Bundles',
-      img: IMG.twogirls, gallery: gallery([IMG.twogirls, IMG.top1, IMG.confident, IMG.blue]),
+      img: IMG.twogirls, pool: [IMG.twogirls, IMG.top1, IMG.confident, IMG.blue],
       colors: [BK, SL, CL], sizes: FULL_SIZES, soldOut: '',
       rating: 5.0, reviewCount: 63, isNew: true, fabricTech: 'KalFlex',
       bundle: true, includes: ['biftu-mid-tunic', 'wide-leg-pant', 'mako-sport-hijab'],
       completeLook: [],
       blurb: 'The full Kalsoni look in one purchase — Biftu Mid-Length Tunic, Wide Leg Pant and a Mako Sport Hijab in coordinating colours. A complete modest outfit, ready to move.',
-      fabric: 'Matched performance knit across all three pieces. Moisture-wicking, four-way stretch.'
+      fabric: 'Matched performance knit across all three pieces. Moisture-wicking, four-way stretch.',
+      reviews: [
+        { name: 'Yasmin A.', date: 'MAY 2026', title: 'Everything matched out of the box', body: 'Bought the Complete Set as my first Kalsoni order — every piece coordinated and arrived ready to wear.' },
+        { name: 'Halima N.', date: 'MAR 2026', title: 'Such good value', body: 'Buying the set saved me money and the pieces look made for each other.' }
+      ]
     },
     {
       id: 'starter-kit', name: 'Starter Kit', price: 129,
       category: 'bundles', categoryLabel: 'BUNDLES', collection: 'Curated Bundles',
-      img: IMG.top2, gallery: gallery([IMG.top2, IMG.hijab1, IMG.blue]),
+      img: IMG.top2, pool: [IMG.top2, IMG.hijab1, IMG.blue],
       colors: [BK, SD], sizes: FULL_SIZES, soldOut: '',
       rating: 4.9, reviewCount: 41, isNew: true, fabricTech: 'KalFlex',
       bundle: true, includes: ['biftu-full-tunic', 'safiya-sport-hijab'],
       completeLook: [],
       blurb: 'New to Kalsoni? Start here. The Biftu Full-Length Tunic paired with a Safiya Sport Hijab — everything you need for your first modest activewear look.',
-      fabric: 'Matched performance knit. Moisture-wicking, four-way stretch, UPF 50+ hijab.'
+      fabric: 'Matched performance knit. Moisture-wicking, four-way stretch, UPF 50+ hijab.',
+      reviews: [
+        { name: 'Sahra L.', date: 'APR 2026', title: 'Perfect intro to the brand', body: 'The tunic and hijab combo was all I needed to get started. Great quality for the price.' },
+        { name: 'Deqa F.', date: 'FEB 2026', title: 'Lovely gift', body: 'Bought it for my sister and she wears it constantly. Easy, thoughtful gift.' }
+      ]
     },
     {
       id: 'mix-match-3', name: 'Mix & Match 3', price: 99,
       category: 'bundles', categoryLabel: 'BUNDLES', collection: 'Curated Bundles',
-      img: IMG.top1, gallery: gallery([IMG.top1, IMG.confident, IMG.shawl]),
+      img: IMG.top1, pool: [IMG.top1, IMG.confident, IMG.shawl],
       colors: [BK, SL, OL], sizes: FULL_SIZES, soldOut: '',
       rating: 4.9, reviewCount: 57, isNew: true, fabricTech: 'KalFlex',
       bundle: true, includes: ['biftu-mid-tunic', 'joggers', 'mako-sport-shawl'],
       completeLook: [],
       blurb: 'Build your own set — choose any three core pieces and save. Mix tunics, bottoms, hijabs and shawls to make the look that moves with you.',
-      fabric: 'Mixed performance fabrics depending on the pieces selected.'
+      fabric: 'Mixed performance fabrics depending on the pieces selected.',
+      reviews: [
+        { name: 'Ifrah B.', date: 'MAY 2026', title: 'Loved picking my three', body: 'Mixed a tunic, joggers and a shawl. Build-your-own bundle is genius and saved money.' },
+        { name: 'Warda H.', date: 'JAN 2026', title: 'Exactly what I wanted', body: 'Got the three pieces I actually needed at a better price. More of this please.' }
+      ]
     }
   ];
 
+  // Per-colour galleries + a default gallery (first colour) for cards.
+  products.forEach(function (p) {
+    p.colorGalleries = colorGalleries(p.pool, p.colors.length);
+    p.gallery = p.colorGalleries[0];
+  });
+
+  // Fallback reviews (used only if a product has none).
   var reviews = [
     { name: 'Hodan A.', date: 'MAY 2026', title: 'Stays put, finally', body: 'I have tried every "sport hijab" out there. This is the only one that does not shift mid-run. Breathable and so light I forget I am wearing it.' },
     { name: 'Maryam K.', date: 'APR 2026', title: 'Coverage and comfort', body: 'The coverage is exactly what I needed and the fabric is genuinely high performance. Wore it for a HIIT class and stayed cool the whole time.' },
@@ -211,6 +270,15 @@
     ]
   };
 
+  // The Journal — product blog of new & upcoming releases (KITH-style).
+  var journal = [
+    { date: 'JUNE 2026', kicker: 'COMING SOON', title: 'The Between Tides Drop', img: IMG.hero, excerpt: 'A first look at our FW26 collection — layered coverage built to breathe. Sign up to shop it first.', productId: 'biftu-full-tunic' },
+    { date: 'MAY 2026', kicker: 'NEW COLOURS', title: 'The Mako Hijab, now in three tones', img: IMG.blue, excerpt: 'Our most-worn sport hijab expands — Sand and Steel join the lineup alongside Black.', productId: 'mako-sport-hijab' },
+    { date: 'APRIL 2026', kicker: 'BEHIND THE SEAMS', title: 'How we built the Biftu Tunic', img: IMG.top1, excerpt: 'The fabric, the fit and the years of testing behind our signature piece.', productId: 'biftu-mid-tunic' },
+    { date: 'MARCH 2026', kicker: 'STYLING', title: 'Five ways to wear the Wide Leg Pant', img: IMG.confident, excerpt: 'From sunrise training to slow evenings — our favourite ways to style the wide leg.', productId: 'wide-leg-pant' },
+    { date: 'FEBRUARY 2026', kicker: 'COMING SOON', title: 'Bundles, reimagined', img: IMG.twogirls, excerpt: 'New curated sets land soon — the easiest way to shop a complete modest look.', productId: 'complete-set' }
+  ];
+
   function money(n) { return '$' + Number(n).toFixed(2); }
   function getProduct(id) {
     for (var i = 0; i < products.length; i++) if (products[i].id === id) return products[i];
@@ -229,6 +297,7 @@
     categoryTiles: categoryTiles,
     ugcPosts: ugcPosts,
     lookbook: lookbook,
+    journal: journal,
     money: money,
     getProduct: getProduct,
     getMany: getMany
