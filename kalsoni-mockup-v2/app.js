@@ -67,10 +67,10 @@
     return '<div class="marquee"><div class="marquee__track">' + msg + msg + '</div></div>';
   }
 
-  // Certified B Corporation badge (placeholder mark — swap for the official logo asset).
+  // Certified B Corporation — official logo asset.
   function bCorpBadge(cls) {
-    return '<span class="bcorp ' + (cls || '') + '" aria-label="Certified B Corporation" title="Certified B Corporation">' +
-      '<span class="bcorp__mark">B</span><span class="bcorp__txt">CERTIFIED<br>CORPORATION</span></span>';
+    return '<img class="bcorp-logo ' + (cls || '') + '" src="assets/bcorp-logo.webp" ' +
+      'alt="Certified B Corporation" width="90" loading="lazy" decoding="async">';
   }
 
   function headerHTML(active) {
@@ -104,9 +104,9 @@
         '<button data-open-sizeguide type="button">Size Guide</button><a href="faq.html">FAQ</a><a href="contact.html">Contact Us</a><a href="fabric.html">Our Fabric</a><a href="collections.html">Collections</a></div></div>' +
       '<div><div class="footer__heading">ABOUT</div><div class="footer__links">' +
         '<a href="index.html#about">Who We Are</a><a href="lookbook.html">Lookbook</a><a href="blog.html">Journal</a><a href="wholesale.html">Wholesale</a><a href="wholesale.html#bulk">Bulk Orders (Schools &amp; Teams)</a><a href="affiliate.html">Affiliate Program</a></div></div>' +
+      '<div class="footer__bcorp">' + bCorpBadge() + '</div>' +
       '<div><div class="footer__heading">FLAGSHIP STORES</div><div class="footer__stores">REI Bloomington<br><span>750 American Blvd W, MN 55420</span><br><br>REI Roseville<br><span>1955 County Road B2 W, MN 55113</span></div></div>' +
       '</div><div class="footer__bottom"><span>&copy; 2026 KALSONI. ALL RIGHTS RESERVED.</span>' +
-      '<span class="footer__trust">' + bCorpBadge('bcorp--sm') + '</span>' +
       '<span class="legal"><a href="#">PRIVACY POLICY</a><a href="#">TERMS OF SERVICE</a></span>' +
       '<span class="footer__powered">Powered by <a href="https://www.powercommerce.com" target="_blank" rel="noopener">Power Commerce</a></span></div></div></footer>';
   }
