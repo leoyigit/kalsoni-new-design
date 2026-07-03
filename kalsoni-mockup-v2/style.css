@@ -1352,3 +1352,52 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; }
   .journal-feat { grid-template-columns: 1fr; gap: 24px; }
   .journal-grid { grid-template-columns: 1fr; gap: 30px; }
 }
+
+/* ---------- Journal article (KITH-style editorial post) ---------- */
+.post-hero { position: relative; height: min(62vh, 560px); overflow: hidden; background: #e7ded2; }
+.post-hero img { width: 100%; height: 100%; object-fit: cover; }
+.post { max-width: 720px; margin: 0 auto; padding: 0 32px; }
+.post-head { text-align: center; padding: 56px 0 8px; }
+.post-head__crumb { font-size: 10.5px; letter-spacing: .22em; color: var(--muted); }
+.post-head__crumb a { color: var(--accent); }
+.post-head__crumb a:hover { text-decoration: underline; }
+.post-head h1 { font-size: clamp(36px, 5vw, 60px); line-height: 1.05; margin: 22px 0 0; }
+.post-head__date { font-size: 11px; letter-spacing: .18em; color: var(--accent); margin-top: 18px; }
+.post-standfirst { font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.6; color: var(--muted); margin: 26px auto 0; max-width: 54ch; }
+.post-body { padding: 28px 0 40px; }
+.post-body > p { font-size: 15.5px; line-height: 1.9; color: var(--ink); margin: 0 0 26px; }
+.post-body > h2 { font-size: clamp(26px, 3vw, 34px); line-height: 1.15; margin: 44px 0 18px; }
+.post-fig { margin: 38px calc(-1 * min(12vw, 140px)) 38px; }
+.post-fig img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: #e7ded2; }
+.post-fig figcaption { font-size: 11.5px; letter-spacing: .08em; color: var(--muted); margin-top: 12px; text-align: center; }
+.post-quote { margin: 44px 0; padding: 0 24px; border-left: 2px solid var(--accent); }
+.post-quote p { font-family: var(--serif); font-style: italic; font-size: clamp(22px, 2.6vw, 28px); line-height: 1.45; margin: 0; }
+.post-quote cite { display: block; font-family: var(--sans); font-style: normal; font-size: 11px; letter-spacing: .18em; color: var(--muted); margin-top: 14px; text-transform: uppercase; }
+.post-shop { margin: 48px calc(-1 * min(18vw, 220px)); padding: 40px 32px 44px; background: var(--card); border: 1px solid var(--line); }
+.post-shop__head { text-align: center; margin-bottom: 28px; }
+.post-shop__head p { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
+.post-shop__grid { display: grid; gap: 24px; }
+.post-shop__grid--1 { grid-template-columns: minmax(0, 320px); justify-content: center; }
+.post-shop__grid--2 { grid-template-columns: repeat(2, 1fr); }
+.post-shop__grid--3 { grid-template-columns: repeat(3, 1fr); }
+.post-shop__grid--4 { grid-template-columns: repeat(4, 1fr); }
+.post-signup { margin: 48px 0 10px; padding: 44px 36px; background: var(--ink); color: var(--paper); text-align: center; }
+.post-signup h3 { font-size: clamp(26px, 3vw, 34px); margin: 14px 0 0; }
+.post-signup p { font-size: 14px; line-height: 1.75; color: rgba(250, 247, 242, .75); margin: 14px auto 24px; max-width: 44ch; }
+.post-signup__form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.post-signup__form .input { flex: 1 1 240px; max-width: 320px; background: transparent; border: 1px solid rgba(250, 247, 242, .35); color: var(--paper); }
+.post-signup__form .input::placeholder { color: rgba(250, 247, 242, .55); }
+.post-signup__form .btn--solid { background: var(--paper); color: var(--ink); }
+.post-signup__form .btn--solid:hover { background: #fff; }
+.post-more { max-width: var(--maxw); margin: 0 auto; padding: 30px 32px 90px; }
+.post-more .section-head--center { margin-bottom: 10px; }
+.journal-grid--flush { border-top: 0; padding-top: 34px; }
+@media (max-width: 980px) {
+  .post-fig { margin-left: 0; margin-right: 0; }
+  .post-shop { margin-left: -16px; margin-right: -16px; padding: 32px 20px 36px; }
+  .post-shop__grid--3, .post-shop__grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .post { padding: 0 24px; }
+  .post-shop__grid--2, .post-shop__grid--3, .post-shop__grid--4 { grid-template-columns: 1fr; }
+}

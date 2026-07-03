@@ -21,7 +21,7 @@
     try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { return []; }
   }
   function saveCart(cart) {
-    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {}
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) { }
     refreshChrome();
   }
   function cartCount() { return getCart().reduce(function (n, it) { return n + it.qty; }, 0); }
@@ -79,18 +79,18 @@
     }
     return '<header class="header"><div class="header__inner">' +
       '<nav class="header__nav">' +
-        nav('shop.html', 'SHOP', 'shop') +
-        nav('collections.html', 'COLLECTIONS', 'collections') +
-        nav('lookbook.html', 'LOOKBOOK', 'lookbook') +
-        nav('blog.html', 'JOURNAL', 'journal') +
-        nav('index.html#about', 'ABOUT US', 'about') +
-        nav('contact.html', 'CONTACT', 'contact') +
+      nav('shop.html', 'SHOP', 'shop') +
+      nav('collections.html', 'COLLECTIONS', 'collections') +
+      nav('lookbook.html', 'LOOKBOOK', 'lookbook') +
+      nav('blog.html', 'JOURNAL', 'journal') +
+      nav('index.html#about', 'ABOUT US', 'about') +
+      nav('contact.html', 'CONTACT', 'contact') +
       '</nav>' +
       '<a href="index.html" class="header__logo">KALSONI</a>' +
       '<div class="header__actions">' +
-        '<button class="iconbtn" data-open-search aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg></button>' +
-        '<a class="iconbtn" href="contact.html" aria-label="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="8" r="4"></circle><path d="M5 21c0-4 3.5-6 7-6s7 2 7 6"></path></svg></a>' +
-        '<button class="iconbtn" data-open-cart aria-label="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6.5 8h11l-1 12.5h-9L6.5 8z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg><span class="count" data-cart-count></span></button>' +
+      '<button class="iconbtn" data-open-search aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg></button>' +
+      '<a class="iconbtn" href="contact.html" aria-label="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="8" r="4"></circle><path d="M5 21c0-4 3.5-6 7-6s7 2 7 6"></path></svg></a>' +
+      '<button class="iconbtn" data-open-cart aria-label="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6.5 8h11l-1 12.5h-9L6.5 8z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg><span class="count" data-cart-count></span></button>' +
       '</div>' +
       '</div></header>';
   }
@@ -98,17 +98,17 @@
   function footerHTML() {
     return '<footer class="footer"><div class="footer__inner"><div class="footer__cols">' +
       '<div><div class="footer__brand">KALSONI</div>' +
-        '<p class="footer__about">Modest activewear &amp; athleisure designed to move freely, comfortably, and with confidence.</p>' +
-        '<div class="footer__social"><a href="https://www.instagram.com/kalsoniapparel/">INSTAGRAM</a><a href="https://www.facebook.com/kalsoniapparel/">FACEBOOK</a><a href="https://www.linkedin.com/company/kalsoni/">LINKEDIN</a></div></div>' +
+      '<p class="footer__about">Modest activewear &amp; athleisure designed to move freely, comfortably, and with confidence.</p>' +
+      '<div class="footer__social"><a href="https://www.instagram.com/kalsoniapparel/">INSTAGRAM</a><a href="https://www.facebook.com/kalsoniapparel/">FACEBOOK</a><a href="https://www.linkedin.com/company/kalsoni/">LINKEDIN</a></div></div>' +
       '<div><div class="footer__heading">HELP</div><div class="footer__links">' +
-        '<button data-open-sizeguide type="button">Size Guide</button><a href="faq.html">FAQ</a><a href="contact.html">Contact Us</a><a href="fabric.html">Our Fabric</a><a href="collections.html">Collections</a></div></div>' +
+      '<button data-open-sizeguide type="button">Size Guide</button><a href="faq.html">FAQ</a><a href="contact.html">Contact Us</a><a href="fabric.html">Our Fabric</a><a href="collections.html">Collections</a></div></div>' +
       '<div><div class="footer__heading">ABOUT</div><div class="footer__links">' +
-        '<a href="index.html#about">Who We Are</a><a href="lookbook.html">Lookbook</a><a href="blog.html">Journal</a><a href="wholesale.html">Wholesale</a><a href="wholesale.html#bulk">Bulk Orders (Schools &amp; Teams)</a><a href="affiliate.html">Affiliate Program</a></div></div>' +
+      '<a href="index.html#about">Who We Are</a><a href="lookbook.html">Lookbook</a><a href="blog.html">Journal</a><a href="wholesale.html">Wholesale</a><a href="wholesale.html#bulk">Bulk Orders (Schools &amp; Teams)</a><a href="affiliate.html">Affiliate Program</a></div></div>' +
       '<div class="footer__bcorp">' + bCorpBadge() + '</div>' +
       '<div><div class="footer__heading">FLAGSHIP STORES</div><div class="footer__stores">REI Bloomington<br><span>750 American Blvd W, MN 55420</span><br><br>REI Roseville<br><span>1955 County Road B2 W, MN 55113</span></div></div>' +
       '</div><div class="footer__bottom"><span>&copy; 2026 KALSONI. ALL RIGHTS RESERVED.</span>' +
       '<span class="legal"><a href="#">PRIVACY POLICY</a><a href="#">TERMS OF SERVICE</a></span>' +
-      '<span class="footer__powered">Powered by <a href="https://www.powercommerce.com" target="_blank" rel="noopener">Power Commerce</a></span></div></div></footer>';
+      '<span class="footer__powered">Designed & Powered by <a href="https://www.powercommerce.com" target="_blank" rel="noopener">Power Commerce</a></span></div></div></footer>';
   }
 
   var WELCOME_ACTIVITIES = ['Running', 'Gym & Lifting', 'Yoga & Pilates', 'Hiking', 'Team Sports', 'Everyday'];
@@ -117,48 +117,48 @@
     return (
       // search
       '<div class="overlay" data-search hidden>' +
-        '<div class="overlay__scrim" data-close-search></div>' +
-        '<div class="search-panel"><div class="search-panel__inner">' +
-          '<div class="search-panel__bar">' +
-            '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>' +
-            '<input type="text" name="q" data-search-input placeholder="Search tunics, hijabs, bundles…">' +
-            '<button data-close-search>CLOSE</button>' +
-          '</div><div data-search-results></div>' +
-        '</div></div>' +
+      '<div class="overlay__scrim" data-close-search></div>' +
+      '<div class="search-panel"><div class="search-panel__inner">' +
+      '<div class="search-panel__bar">' +
+      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>' +
+      '<input type="text" name="q" data-search-input placeholder="Search tunics, hijabs, bundles…">' +
+      '<button data-close-search>CLOSE</button>' +
+      '</div><div data-search-results></div>' +
+      '</div></div>' +
       '</div>' +
       // cart drawer
       '<div class="overlay" data-cart hidden>' +
-        '<div class="overlay__scrim" data-close-cart></div>' +
-        '<aside class="drawer">' +
-          '<div class="drawer__head"><span>YOUR CART (<span data-cart-count>0</span>)</span>' +
-            '<button data-close-cart aria-label="Close" class="x"><svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></button></div>' +
-          '<div data-cart-body class="drawer__body"></div>' +
-        '</aside>' +
+      '<div class="overlay__scrim" data-close-cart></div>' +
+      '<aside class="drawer">' +
+      '<div class="drawer__head"><span>YOUR CART (<span data-cart-count>0</span>)</span>' +
+      '<button data-close-cart aria-label="Close" class="x"><svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></button></div>' +
+      '<div data-cart-body class="drawer__body"></div>' +
+      '</aside>' +
       '</div>' +
       // size guide
       '<div class="overlay overlay--center" data-sizeguide hidden>' +
-        '<div class="overlay__scrim" data-close-sizeguide></div>' +
-        '<div class="modal"><div class="modal__head"><h3>Size Guide</h3><button data-close-sizeguide>CLOSE</button></div>' +
-          '<p class="modal__note">Measurements in inches. For a relaxed, modest fit, size up. Between sizes? Go with the larger.</p>' +
-          '<div class="sizetable"><div class="sizetable__head"><div>SIZE</div><div>BUST</div><div>WAIST</div><div>HIP</div></div>' +
-          K.sizeRows.map(function (r) { return '<div class="sizetable__row"><div>' + r.size + '</div><div>' + r.bust + '</div><div>' + r.waist + '</div><div>' + r.hip + '</div></div>'; }).join('') +
-          '</div></div>' +
+      '<div class="overlay__scrim" data-close-sizeguide></div>' +
+      '<div class="modal"><div class="modal__head"><h3>Size Guide</h3><button data-close-sizeguide>CLOSE</button></div>' +
+      '<p class="modal__note">Measurements in inches. For a relaxed, modest fit, size up. Between sizes? Go with the larger.</p>' +
+      '<div class="sizetable"><div class="sizetable__head"><div>SIZE</div><div>BUST</div><div>WAIST</div><div>HIP</div></div>' +
+      K.sizeRows.map(function (r) { return '<div class="sizetable__row"><div>' + r.size + '</div><div>' + r.bust + '</div><div>' + r.waist + '</div><div>' + r.hip + '</div></div>'; }).join('') +
+      '</div></div>' +
       '</div>' +
       // welcome popup (Oiselle-style — activities + email capture)
       '<div class="overlay overlay--center" data-welcome hidden>' +
-        '<div class="overlay__scrim" data-close-welcome></div>' +
-        '<div class="welcome">' +
-          '<button class="welcome__x" data-close-welcome aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></button>' +
-          '<span class="eyebrow">WELCOME TO KALSONI</span>' +
-          '<h3>Get 10% off your first order</h3>' +
-          '<p>Tell us how you like to move and we&rsquo;ll tailor your edit.</p>' +
-          '<div class="welcome__chips">' + WELCOME_ACTIVITIES.map(function (a) { return '<button type="button" class="welcome__chip" data-welcome-chip>' + a + '</button>'; }).join('') + '</div>' +
-          '<form class="welcome__form" data-welcome-form>' +
-            '<input type="email" class="input" placeholder="Email address" required>' +
-            '<button class="btn btn--solid" type="submit">UNLOCK 10% OFF</button>' +
-          '</form>' +
-          '<button class="welcome__skip" data-close-welcome type="button">No thanks, I&rsquo;ll pay full price</button>' +
-        '</div>' +
+      '<div class="overlay__scrim" data-close-welcome></div>' +
+      '<div class="welcome">' +
+      '<button class="welcome__x" data-close-welcome aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></button>' +
+      '<span class="eyebrow">WELCOME TO KALSONI</span>' +
+      '<h3>Get 10% off your first order</h3>' +
+      '<p>Tell us how you like to move and we&rsquo;ll tailor your edit.</p>' +
+      '<div class="welcome__chips">' + WELCOME_ACTIVITIES.map(function (a) { return '<button type="button" class="welcome__chip" data-welcome-chip>' + a + '</button>'; }).join('') + '</div>' +
+      '<form class="welcome__form" data-welcome-form>' +
+      '<input type="email" class="input" placeholder="Email address" required>' +
+      '<button class="btn btn--solid" type="submit">UNLOCK 10% OFF</button>' +
+      '</form>' +
+      '<button class="welcome__skip" data-close-welcome type="button">No thanks, I&rsquo;ll pay full price</button>' +
+      '</div>' +
       '</div>' +
       // toast
       '<div class="toast" data-toast hidden></div>'
@@ -174,18 +174,18 @@
       : (p.colors.length > 1 ? '<div class="card__colors">' + p.colors.length + ' Colors</div>' : '<div class="card__colors">&nbsp;</div>');
     return '<article class="card">' +
       '<a class="card__media" href="product.html?id=' + p.id + '">' +
-        '<img class="card__img card__img--front" src="' + p.img + '" alt="' + esc(p.name) + '" loading="lazy">' +
-        '<img class="card__img card__img--hover" src="' + hoverImg + '" alt="" aria-hidden="true" loading="lazy">' +
-        (p.isNew ? '<span class="card__badge">NEW</span>' : '') +
-        '<button class="card__add" type="button" data-add="' + p.id + '" aria-label="Quick add">+</button>' +
+      '<img class="card__img card__img--front" src="' + p.img + '" alt="' + esc(p.name) + '" loading="lazy">' +
+      '<img class="card__img card__img--hover" src="' + hoverImg + '" alt="" aria-hidden="true" loading="lazy">' +
+      (p.isNew ? '<span class="card__badge">NEW</span>' : '') +
+      '<button class="card__add" type="button" data-add="' + p.id + '" aria-label="Quick add">+</button>' +
       '</a>' +
       '<a class="card__meta" href="product.html?id=' + p.id + '">' +
-        '<div><div class="card__cat">' + p.categoryLabel + '</div><div class="card__name">' + esc(p.name) + '</div></div>' +
-        '<div class="card__price">' + money(p.price) + '</div>' +
+      '<div><div class="card__cat">' + p.categoryLabel + '</div><div class="card__name">' + esc(p.name) + '</div></div>' +
+      '<div class="card__price">' + money(p.price) + '</div>' +
       '</a>' +
       tag +
       '<div class="card__dots">' + dots + '</div>' +
-    '</article>';
+      '</article>';
   }
 
   /* ---------- chrome refresh ---------- */
@@ -215,22 +215,22 @@
       return '<div class="cartline">' +
         '<div class="cartline__media"><img src="' + it.img + '" alt="' + esc(it.name) + '"></div>' +
         '<div class="cartline__info">' +
-          '<div class="cartline__top"><span>' + esc(it.name) + '</span><span>' + money(it.price * it.qty) + '</span></div>' +
-          '<div class="cartline__meta">' + esc(it.colorName) + ' / ' + esc(it.size) + '</div>' +
-          '<div class="cartline__bottom">' +
-            '<div class="qty"><button data-dec="' + idx + '">−</button><span>' + it.qty + '</span><button data-inc="' + idx + '">+</button></div>' +
-            '<button class="cartline__remove" data-remove="' + idx + '">REMOVE</button>' +
-          '</div>' +
+        '<div class="cartline__top"><span>' + esc(it.name) + '</span><span>' + money(it.price * it.qty) + '</span></div>' +
+        '<div class="cartline__meta">' + esc(it.colorName) + ' / ' + esc(it.size) + '</div>' +
+        '<div class="cartline__bottom">' +
+        '<div class="qty"><button data-dec="' + idx + '">−</button><span>' + it.qty + '</span><button data-inc="' + idx + '">+</button></div>' +
+        '<button class="cartline__remove" data-remove="' + idx + '">REMOVE</button>' +
+        '</div>' +
         '</div></div>';
     }).join('');
     body.innerHTML =
       '<div class="drawer__ship"><div class="drawer__ship-label">' + shipMsg + '</div>' +
-        '<div class="drawer__ship-track"><div class="drawer__ship-fill" style="width:' + pct + '%"></div></div></div>' +
+      '<div class="drawer__ship-track"><div class="drawer__ship-fill" style="width:' + pct + '%"></div></div></div>' +
       '<div class="drawer__items">' + items + '</div>' +
       '<div class="drawer__foot">' +
-        '<div class="drawer__sub"><span>SUBTOTAL</span><span>' + money(sub) + '</span></div>' +
-        '<div class="drawer__tax">Shipping &amp; taxes calculated at checkout.</div>' +
-        '<a class="btn btn--solid btn--full" href="checkout.html">CHECKOUT</a>' +
+      '<div class="drawer__sub"><span>SUBTOTAL</span><span>' + money(sub) + '</span></div>' +
+      '<div class="drawer__tax">Shipping &amp; taxes calculated at checkout.</div>' +
+      '<a class="btn btn--solid btn--full" href="checkout.html">CHECKOUT</a>' +
       '</div>';
   }
 
@@ -239,10 +239,10 @@
   function closeOverlay(sel) { var o = $(sel); if (o) { o.hidden = true; document.body.style.overflow = ''; } }
   function openCart() { renderCartDrawer(); openOverlay('[data-cart]'); }
   function openSearch() { openOverlay('[data-search]'); var i = $('[data-search-input]'); if (i) i.focus(); }
-  function closeWelcome() { closeOverlay('[data-welcome]'); try { localStorage.setItem(WELCOME_KEY, '1'); } catch (e) {} }
+  function closeWelcome() { closeOverlay('[data-welcome]'); try { localStorage.setItem(WELCOME_KEY, '1'); } catch (e) { } }
   function maybeShowWelcome() {
     if (document.body.getAttribute('data-page') !== 'home') return;
-    try { if (localStorage.getItem(WELCOME_KEY)) return; } catch (e) {}
+    try { if (localStorage.getItem(WELCOME_KEY)) return; } catch (e) { }
     setTimeout(function () { var o = $('[data-welcome]'); if (o && o.hidden) o.hidden = false; }, 1400);
   }
 
@@ -368,11 +368,11 @@
     }).join('');
     root.innerHTML =
       '<section class="lb-hero"><img src="' + lb.hero + '" alt="' + esc(lb.title) + '">' +
-        '<div class="lb-hero__copy"><span class="eyebrow">' + lb.season + '</span><h1>' + esc(lb.title) + '</h1>' +
-        '<p>' + esc(lb.intro) + '</p></div></section>' +
+      '<div class="lb-hero__copy"><span class="eyebrow">' + lb.season + '</span><h1>' + esc(lb.title) + '</h1>' +
+      '<p>' + esc(lb.intro) + '</p></div></section>' +
       '<section class="lb-blocks">' + blocks + '</section>' +
       '<section class="faq-cta" style="border-top:1px solid var(--line);"><h2>Shop the collection</h2>' +
-        '<p>Every look is available now — modest coverage that performs.</p><a href="shop.html" class="btn btn--solid">SHOP ALL</a></section>';
+      '<p>Every look is available now — modest coverage that performs.</p><a href="shop.html" class="btn btn--solid">SHOP ALL</a></section>';
   }
 
   function renderJournal() {
@@ -383,16 +383,66 @@
     var rest = posts.slice(1);
     root.innerHTML =
       '<div class="page-head"><span class="eyebrow">THE JOURNAL</span><h1>New &amp; upcoming</h1>' +
-        '<p>A first look at new drops, fresh colourways, and the stories behind the pieces.</p></div>' +
-      '<a class="journal-feat" href="product.html?id=' + feat.productId + '">' +
-        '<div class="journal-feat__media"><img src="' + feat.img + '" alt="' + esc(feat.title) + '"><span class="journal-card__kicker">' + feat.kicker + '</span></div>' +
-        '<div class="journal-feat__copy"><span class="journal-card__date">' + feat.date + '</span>' +
-        '<h2>' + esc(feat.title) + '</h2><p>' + esc(feat.excerpt) + '</p><span class="link-underline">READ MORE &rarr;</span></div></a>' +
+      '<p>A first look at new drops, fresh colourways, and the stories behind the pieces.</p></div>' +
+      '<a class="journal-feat" href="journal-post.html?post=' + feat.slug + '">' +
+      '<div class="journal-feat__media"><img src="' + feat.img + '" alt="' + esc(feat.title) + '"><span class="journal-card__kicker">' + feat.kicker + '</span></div>' +
+      '<div class="journal-feat__copy"><span class="journal-card__date">' + feat.date + '</span>' +
+      '<h2>' + esc(feat.title) + '</h2><p>' + esc(feat.excerpt) + '</p><span class="link-underline">READ THE STORY &rarr;</span></div></a>' +
       '<div class="journal-grid">' + rest.map(function (po) {
-        return '<a class="journal-card" href="product.html?id=' + po.productId + '">' +
+        return '<a class="journal-card" href="journal-post.html?post=' + po.slug + '">' +
           '<div class="journal-card__media"><img src="' + po.img + '" alt="' + esc(po.title) + '" loading="lazy"><span class="journal-card__kicker">' + po.kicker + '</span></div>' +
           '<div class="journal-card__date">' + po.date + '</div><h3>' + esc(po.title) + '</h3><p>' + esc(po.excerpt) + '</p></a>';
       }).join('') + '</div>';
+  }
+
+  function renderJournalPost() {
+    var root = $('#journal-post');
+    if (!root) return;
+    var post = K.getPost(qparam('post') || '');
+    document.title = post.title + ' — The Kalsoni Journal';
+
+    function blockHTML(b) {
+      if (b.type === 'p') return '<p>' + b.html + '</p>';
+      if (b.type === 'h2') return '<h2>' + esc(b.text) + '</h2>';
+      if (b.type === 'img') return '<figure class="post-fig"><img src="' + b.src + '" alt="' + esc(b.caption || post.title) + '" loading="lazy">' +
+        (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
+      if (b.type === 'quote') return '<blockquote class="post-quote"><p>&ldquo;' + esc(b.text) + '&rdquo;</p>' +
+        (b.cite ? '<cite>' + esc(b.cite) + '</cite>' : '') + '</blockquote>';
+      if (b.type === 'shop') {
+        var items = K.getMany(b.ids);
+        return '<div class="post-shop"><div class="post-shop__head"><span class="eyebrow">' + esc(b.title || 'Shop the story') + '</span>' +
+          (b.note ? '<p>' + esc(b.note) + '</p>' : '') + '</div>' +
+          '<div class="post-shop__grid post-shop__grid--' + Math.min(items.length, 4) + '">' + items.map(cardHTML).join('') + '</div></div>';
+      }
+      if (b.type === 'signup') {
+        return '<div class="post-signup"><span class="eyebrow">' + esc(post.kicker) + '</span><h3>' + esc(b.title) + '</h3>' +
+          '<p>' + esc(b.body) + '</p>' +
+          '<form class="post-signup__form" data-toast-form="THANKS — YOU\'RE ON THE LIST">' +
+          '<input type="email" name="email" class="input" placeholder="Email address" required>' +
+          '<button class="btn btn--solid" type="submit">' + esc(b.cta || 'SIGN UP') + '</button></form></div>';
+      }
+      return '';
+    }
+
+    var more = K.journal.filter(function (j) { return j.slug !== post.slug; }).slice(0, 3);
+
+    root.innerHTML =
+      '<div class="post-hero"><img src="' + post.hero + '" alt="' + esc(post.title) + '"></div>' +
+      '<article class="post">' +
+      '<div class="post-head">' +
+      '<div class="post-head__crumb"><a href="blog.html">THE JOURNAL</a> &nbsp;/&nbsp; <span>' + post.kicker + '</span></div>' +
+      '<h1>' + esc(post.title) + '</h1>' +
+      '<div class="post-head__date">' + post.date + '</div>' +
+      '<p class="post-standfirst">' + esc(post.standfirst) + '</p>' +
+      '</div>' +
+      '<div class="post-body">' + post.blocks.map(blockHTML).join('') + '</div>' +
+      '</article>' +
+      '<section class="post-more"><div class="section-head--center"><span class="eyebrow">KEEP READING</span><h2>More from the Journal</h2></div>' +
+      '<div class="journal-grid journal-grid--flush">' + more.map(function (po) {
+        return '<a class="journal-card" href="journal-post.html?post=' + po.slug + '">' +
+          '<div class="journal-card__media"><img src="' + po.img + '" alt="' + esc(po.title) + '" loading="lazy"><span class="journal-card__kicker">' + po.kicker + '</span></div>' +
+          '<div class="journal-card__date">' + po.date + '</div><h3>' + esc(po.title) + '</h3><p>' + esc(po.excerpt) + '</p></a>';
+      }).join('') + '</div></section>';
   }
 
   function renderProduct() {
@@ -437,36 +487,36 @@
       // bundles show a "What's included" list; standard products show a size grid.
       var selectorBlock = isBundle
         ? '<div class="pdp__label">WHAT\'S INCLUDED</div>' +
-            '<div class="pdp__includes">' + bundleItems.map(function (x) {
-              return '<a class="incl" href="product.html?id=' + x.id + '"><img src="' + x.img + '" alt="' + esc(x.name) + '">' +
-                '<div><div class="incl__name">' + esc(x.name) + '</div><div class="incl__cat">' + x.categoryLabel + '</div></div></a>';
-            }).join('') + '</div>' +
-            '<div class="pdp__bundlenote">Sizes confirmed for each piece after checkout.</div>'
+        '<div class="pdp__includes">' + bundleItems.map(function (x) {
+          return '<a class="incl" href="product.html?id=' + x.id + '"><img src="' + x.img + '" alt="' + esc(x.name) + '">' +
+            '<div><div class="incl__name">' + esc(x.name) + '</div><div class="incl__cat">' + x.categoryLabel + '</div></div></a>';
+        }).join('') + '</div>' +
+        '<div class="pdp__bundlenote">Sizes confirmed for each piece after checkout.</div>'
         : '<div class="pdp__label pdp__label--row"><span>SIZE</span><button class="link-underline" data-open-sizeguide>SIZE GUIDE</button></div>' +
-            '<div class="pdp__sizes">' + sizes + '</div>';
+        '<div class="pdp__sizes">' + sizes + '</div>';
 
       var colorLabel = isBundle ? 'COLORWAY' : 'COLOR';
 
       root.innerHTML =
         '<div class="crumbs"><a href="shop.html">SHOP</a> &nbsp;/&nbsp; ' + p.categoryLabel + ' &nbsp;/&nbsp; <span>' + esc(p.name) + '</span></div>' +
         '<div class="pdp">' +
-          '<div class="pdp__gallery"><div class="pdp__thumbs">' + thumbs + '</div>' +
-            '<div class="pdp__main"><img src="' + gallery[state.thumb].img + '" alt="' + esc(p.name) + '"><span class="pdp__shotlabel">' + gallery[state.thumb].label + '</span></div></div>' +
-          '<div class="pdp__info">' +
-            '<div class="pdp__cat">' + p.categoryLabel + '</div>' +
-            '<h1>' + esc(p.name) + '</h1>' +
-            '<div class="pdp__collection">' + esc(p.collection) + (p.fabricTech ? ' &middot; <a href="fabric.html">' + p.fabricTech + ' fabric &rarr;</a>' : '') + '</div>' +
-            '<div class="pdp__rating"><span class="pdp__price">' + money(p.price) + '</span><span class="vline"></span>' +
-              '<span class="stars">' + STARS + '</span><span class="pdp__reviews">' + p.rating.toFixed(1) + ' (' + p.reviewCount + ')</span></div>' +
-            '<p class="pdp__blurb">' + esc(p.blurb) + '</p>' +
-            '<div class="pdp__label">' + colorLabel + ' — <span>' + p.colors[state.color].name + '</span></div>' +
-            '<div class="pdp__swatches">' + colors + '</div>' +
-            selectorBlock +
-            '<div class="pdp__buy"><div class="qty"><button data-qty="-1">−</button><span>' + state.qty + '</span><button data-qty="1">+</button></div>' +
-              '<button class="btn btn--solid pdp__add">ADD TO CART — ' + money(p.price) + '</button></div>' +
-            '<div class="pdp__assure">✓ Free shipping over $75 &nbsp;·&nbsp; 30-day easy returns</div>' +
-            '<div class="pdp__acc">' + accordion + '</div>' +
-          '</div>' +
+        '<div class="pdp__gallery"><div class="pdp__thumbs">' + thumbs + '</div>' +
+        '<div class="pdp__main"><img src="' + gallery[state.thumb].img + '" alt="' + esc(p.name) + '"><span class="pdp__shotlabel">' + gallery[state.thumb].label + '</span></div></div>' +
+        '<div class="pdp__info">' +
+        '<div class="pdp__cat">' + p.categoryLabel + '</div>' +
+        '<h1>' + esc(p.name) + '</h1>' +
+        '<div class="pdp__collection">' + esc(p.collection) + (p.fabricTech ? ' &middot; <a href="fabric.html">' + p.fabricTech + ' fabric &rarr;</a>' : '') + '</div>' +
+        '<div class="pdp__rating"><span class="pdp__price">' + money(p.price) + '</span><span class="vline"></span>' +
+        '<span class="stars">' + STARS + '</span><span class="pdp__reviews">' + p.rating.toFixed(1) + ' (' + p.reviewCount + ')</span></div>' +
+        '<p class="pdp__blurb">' + esc(p.blurb) + '</p>' +
+        '<div class="pdp__label">' + colorLabel + ' — <span>' + p.colors[state.color].name + '</span></div>' +
+        '<div class="pdp__swatches">' + colors + '</div>' +
+        selectorBlock +
+        '<div class="pdp__buy"><div class="qty"><button data-qty="-1">−</button><span>' + state.qty + '</span><button data-qty="1">+</button></div>' +
+        '<button class="btn btn--solid pdp__add">ADD TO CART — ' + money(p.price) + '</button></div>' +
+        '<div class="pdp__assure">✓ Free shipping over $75 &nbsp;·&nbsp; 30-day easy returns</div>' +
+        '<div class="pdp__acc">' + accordion + '</div>' +
+        '</div>' +
         '</div>' +
         (lookItems.length ? '<section class="pdp-look"><div class="section-head--center"><span class="eyebrow">STYLE IT WITH</span><h2>Complete the look</h2></div>' +
           '<div class="lookgrid">' + lookItems.map(function (x) {
@@ -476,11 +526,11 @@
               '<button class="btn btn--outline lookitem__add" data-add="' + x.id + '">ADD</button></div>';
           }).join('') + '</div></section>' : '') +
         '<section class="pdp-reviews"><div class="pdp-reviews__head"><h2>Reviews</h2><div class="stars">' + STARS + '</div>' +
-          '<div class="pdp-reviews__sub">' + p.rating.toFixed(1) + ' out of 5 · ' + p.reviewCount + ' reviews</div></div>' +
-          '<div class="pdp-reviews__list">' + (p.reviews && p.reviews.length ? p.reviews : K.reviews).map(function (r) {
-            return '<div class="review"><div class="review__top"><span class="stars">' + STARS + '</span><span class="review__date">' + r.date + '</span></div>' +
-              '<div class="review__title">' + esc(r.title) + '</div><p>' + esc(r.body) + '</p><div class="review__name">' + esc(r.name) + ' · VERIFIED BUYER</div></div>';
-          }).join('') + '</div></section>' +
+        '<div class="pdp-reviews__sub">' + p.rating.toFixed(1) + ' out of 5 · ' + p.reviewCount + ' reviews</div></div>' +
+        '<div class="pdp-reviews__list">' + (p.reviews && p.reviews.length ? p.reviews : K.reviews).map(function (r) {
+          return '<div class="review"><div class="review__top"><span class="stars">' + STARS + '</span><span class="review__date">' + r.date + '</span></div>' +
+            '<div class="review__title">' + esc(r.title) + '</div><p>' + esc(r.body) + '</p><div class="review__name">' + esc(r.name) + ' · VERIFIED BUYER</div></div>';
+        }).join('') + '</div></section>' +
         '<section class="pdp-related"><h2>You may also like</h2><div class="product-grid">' + related.map(cardHTML).join('') + '</div></section>';
     }
 
@@ -514,10 +564,10 @@
     var summaryItems = cart.length === 0
       ? '<p class="summary__empty">Your cart is empty. <a href="shop.html">Shop now</a></p>'
       : cart.map(function (it) {
-          return '<div class="summary__line"><div class="summary__media"><img src="' + it.img + '" alt="' + esc(it.name) + '"><span>' + it.qty + '</span></div>' +
-            '<div class="summary__info"><div>' + esc(it.name) + '</div><div class="summary__meta">' + esc(it.colorName) + ' / ' + esc(it.size) + '</div></div>' +
-            '<div>' + money(it.price * it.qty) + '</div></div>';
-        }).join('');
+        return '<div class="summary__line"><div class="summary__media"><img src="' + it.img + '" alt="' + esc(it.name) + '"><span>' + it.qty + '</span></div>' +
+          '<div class="summary__info"><div>' + esc(it.name) + '</div><div class="summary__meta">' + esc(it.colorName) + ' / ' + esc(it.size) + '</div></div>' +
+          '<div>' + money(it.price * it.qty) + '</div></div>';
+      }).join('');
 
     $('#summary-items').innerHTML = summaryItems;
     $('#summary-sub').textContent = money(sub);
@@ -601,6 +651,7 @@
     else if (page === 'collections') renderCollections();
     else if (page === 'lookbook') renderLookbook();
     else if (page === 'journal') renderJournal();
+    else if (page === 'journal-post') renderJournalPost();
     else if (page === 'product') renderProduct();
     else if (page === 'checkout') renderCheckout();
     renderForms();

@@ -271,15 +271,145 @@
   };
 
   // The Journal — product blog of new & upcoming releases (KITH-style).
+  // Each entry links to a full editorial article (journal-post.html?post=slug).
   var journal = [
-    { date: 'JUNE 2026', kicker: 'COMING SOON', title: 'The Between Tides Drop', img: IMG.hero, excerpt: 'A first look at our FW26 collection — layered coverage built to breathe. Sign up to shop it first.', productId: 'biftu-full-tunic' },
-    { date: 'MAY 2026', kicker: 'NEW COLOURS', title: 'The Mako Hijab, now in three tones', img: IMG.blue, excerpt: 'Our most-worn sport hijab expands — Sand and Steel join the lineup alongside Black.', productId: 'mako-sport-hijab' },
-    { date: 'APRIL 2026', kicker: 'BEHIND THE SEAMS', title: 'How we built the Biftu Tunic', img: IMG.top1, excerpt: 'The fabric, the fit and the years of testing behind our signature piece.', productId: 'biftu-mid-tunic' },
-    { date: 'MARCH 2026', kicker: 'STYLING', title: 'Five ways to wear the Wide Leg Pant', img: IMG.confident, excerpt: 'From sunrise training to slow evenings — our favourite ways to style the wide leg.', productId: 'wide-leg-pant' },
-    { date: 'FEBRUARY 2026', kicker: 'COMING SOON', title: 'Bundles, reimagined', img: IMG.twogirls, excerpt: 'New curated sets land soon — the easiest way to shop a complete modest look.', productId: 'complete-set' }
+    { slug: 'between-tides-drop', date: 'JUNE 2026', kicker: 'COMING SOON', title: 'A Closer Look at Between Tides', img: IMG.hero, excerpt: 'A first look at our FW26 collection — layered coverage built to breathe. Sign up to shop it first.' },
+    { slug: 'upf-performance-shirt', date: 'JUNE 2026', kicker: 'IN THE WORKS', title: 'Sun-proof: the UPF 50+ Performance Shirt', img: IMG.jacket, excerpt: 'The next piece in the line — a long-sleeve performance shirt with built-in UPF 50+ sun protection.' },
+    { slug: 'mako-three-tones', date: 'MAY 2026', kicker: 'NEW COLOURS', title: 'The Mako Hijab, now in three tones', img: IMG.blue, excerpt: 'Our most-worn sport hijab expands — Sand and Steel join the lineup alongside Black.' },
+    { slug: 'behind-the-seams-biftu', date: 'APRIL 2026', kicker: 'BEHIND THE SEAMS', title: 'How we built the Biftu Tunic', img: IMG.top1, excerpt: 'The fabric, the fit and the years of testing behind our signature piece.' },
+    { slug: 'five-ways-wide-leg', date: 'MARCH 2026', kicker: 'STYLING', title: 'Five ways to wear the Wide Leg Pant', img: IMG.confident, excerpt: 'From sunrise training to slow evenings — our favourite ways to style the wide leg.' },
+    { slug: 'bundles-reimagined', date: 'FEBRUARY 2026', kicker: 'COMING SOON', title: 'Bundles, reimagined', img: IMG.twogirls, excerpt: 'New curated sets land soon — the easiest way to shop a complete modest look.' }
+  ];
+
+  // Full article content for each journal entry.
+  // Block types: h2 | p (html allowed) | img {src, caption} | quote {text, cite}
+  //              shop {title, note, ids} | signup {title, body, cta}
+  var journalPosts = [
+    {
+      slug: 'between-tides-drop',
+      date: 'JUNE 2026',
+      kicker: 'COMING SOON',
+      title: 'A Closer Look at Between Tides',
+      hero: IMG.hero,
+      standfirst: 'Our FW26 collection is a study in movement and stillness — layered coverage that breathes, designed for the in-between moments from sunrise training to slow evenings. Here is an early look at the pieces, the palette and the thinking behind the drop.',
+      blocks: [
+        { type: 'p', html: 'Every Kalsoni collection starts with the same question: where does modest activewear still make you choose between coverage and comfort? For Between Tides, the answer was layering. Most of us do not train in a single piece — we layer a tunic over a pant, a shawl over a tunic, and every added layer is added heat.' },
+        { type: 'p', html: 'So this collection was engineered from the skin out. The Biftu Full-Length Tunic returns as the anchor piece, cut in our KalFlex knit with a re-graded drape that sits away from the body, so air actually moves under the layer instead of being trapped by it.' },
+        { type: 'img', src: IMG.top2, caption: 'The Biftu Full-Length Tunic — the anchor of the Between Tides drop.' },
+        { type: 'h2', text: 'The palette' },
+        { type: 'p', html: 'Between Tides borrows its colours from the hour when the light changes — Sand, Slate and Ivory, with Clay as the single warm accent. Every piece in the drop coordinates with every other piece, so any tunic, pant and hijab you pull from the collection works as one look.' },
+        { type: 'quote', text: 'We wanted a collection you could get dressed in with your eyes closed — every combination already works.', cite: 'Kalsoni Design Team' },
+        { type: 'h2', text: 'What to expect' },
+        { type: 'p', html: 'The drop pairs the full-length tunic with the Wide Leg Pant and the Safiya Sport Hijab — full coverage at the neckline, two sizes for a proper fit, and a knit that stays put from the first rep to the last. The pieces below are live now; the new colourways land with the drop.' },
+        { type: 'shop', title: 'Shop the story', note: 'The Between Tides silhouettes, available now in core colours.', ids: ['biftu-full-tunic', 'wide-leg-pant', 'safiya-sport-hijab'] },
+        { type: 'signup', title: 'Shop it first', body: 'Between Tides lands this fall. Join the list and get 24-hour early access before the collection goes live.', cta: 'GET EARLY ACCESS' }
+      ]
+    },
+    {
+      slug: 'upf-performance-shirt',
+      date: 'JUNE 2026',
+      kicker: 'IN THE WORKS',
+      title: 'Sun-proof: the UPF 50+ Performance Shirt',
+      hero: IMG.jacket,
+      standfirst: 'The next piece in the Kalsoni line is a long-sleeve performance shirt with UPF 50+ sun protection built into the fabric itself — full coverage that works as hard outdoors as it does in the studio.',
+      blocks: [
+        { type: 'p', html: 'Modest activewear already covers you — but coverage is not the same as protection. Standard knits let a surprising amount of UV through, especially when stretched. Our community trains outside: long runs, hikes, sculling on the lakes, full days at outdoor tournaments. They asked for a layer that takes sun exposure off the list of things to think about.' },
+        { type: 'p', html: 'The answer is a long-sleeve performance shirt cut from our SolShield fabric — the same UPF 50+ knit we use in the Safiya and Mako shawls, re-engineered at a heavier gauge for a standalone top. UPF 50+ means the fabric blocks about 98% of UVA and UVB rays, rated in the fabric, not sprayed on, so it never washes out.' },
+        { type: 'h2', text: 'Designed for long hours outside' },
+        { type: 'p', html: 'The fit follows the Biftu philosophy: relaxed through the body, longer at the hem, with thumbhole cuffs so the sleeve stays anchored over the back of the hand — the spot everyone forgets to cover. Quick-dry and anti-odour finishes carry over from the rest of the SolShield line.' },
+        { type: 'quote', text: 'It blocks about 98% of UV — rated in the fabric itself, so it never washes out.', cite: 'Fabric development notes' },
+        { type: 'p', html: 'While the shirt is in final wear-testing, the SolShield fabric is already out in the world — both of our performance shawls are cut from it, and they are the best way to feel the hand of the fabric before the shirt lands.' },
+        { type: 'shop', title: 'Meet the fabric', note: 'SolShield UPF 50+ — already available in our performance shawls.', ids: ['safiya-sport-shawl', 'mako-sport-shawl'] },
+        { type: 'signup', title: 'Be first to know', body: 'The UPF 50+ Performance Shirt is in final testing. Leave your email and we will tell you the moment it drops.', cta: 'NOTIFY ME' }
+      ]
+    },
+    {
+      slug: 'mako-three-tones',
+      date: 'MAY 2026',
+      kicker: 'NEW COLOURS',
+      title: 'The Mako Hijab, now in three tones',
+      hero: IMG.blue,
+      standfirst: 'Our most-worn sport hijab grows up — Sand and Steel join Black, so the Mako finally matches every outfit it gets pulled over.',
+      blocks: [
+        { type: 'p', html: 'The Mako Sport Hijab has quietly become the piece our customers reorder most. One size, an easy pull-on fit, and a BreezeLuxe knit light enough to forget mid-workout — it earned its place as the everyday default. But it only came in Black, and you told us: the hijab is the one piece that has to work with everything.' },
+        { type: 'img', src: IMG.hijab1, caption: 'The Mako’s pull-on construction — no pins, no wrap, no readjusting.' },
+        { type: 'h2', text: 'Why Sand and Steel' },
+        { type: 'p', html: 'We tested a dozen tones against the full catalog and kept coming back to two. Sand is the warm neutral that lifts the Biftu Tunic’s earth palette; Steel is the cool one that sharpens Slate and Black. Between the three, every colour combination in the line now has a matching Mako.' },
+        { type: 'p', html: 'The fabric has not changed — 90% recycled polyester, 10% elastane, moisture-wicking, quick-dry, anti-odour. If your Black Mako fits, the new tones fit identically.' },
+        { type: 'quote', text: 'Light enough that I forget I am wearing it during HIIT, and it stays put the whole class.', cite: 'Sagal A., verified buyer' },
+        { type: 'shop', title: 'Shop the Mako line', note: 'The hijab in three tones, and the matching shawl in four.', ids: ['mako-sport-hijab', 'mako-sport-shawl'] },
+        { type: 'p', html: 'Prefer a fitted, two-size construction? The Safiya Sport Hijab is the Mako’s secure high-intensity sibling — full coverage at the neckline and engineered to stay put through every sprint.' },
+        { type: 'shop', title: 'Complete the rotation', ids: ['safiya-sport-hijab'] }
+      ]
+    },
+    {
+      slug: 'behind-the-seams-biftu',
+      date: 'APRIL 2026',
+      kicker: 'BEHIND THE SEAMS',
+      title: 'How we built the Biftu Tunic',
+      hero: IMG.top1,
+      standfirst: 'Three years, four fabric mills and more than sixty prototypes — the story of the piece that started Kalsoni, and why the details matter more than they look.',
+      blocks: [
+        { type: 'p', html: 'The Biftu Tunic exists because nothing like it did. When we started training in modest wear, the options were a compromise in one direction or the other: activewear brands offered "longline" tops that ended at the hip, and modest fashion offered beautiful tunics in fabrics never meant to sweat in. The gap in the middle is where Kalsoni lives.' },
+        { type: 'h2', text: 'The fabric came first' },
+        { type: 'p', html: 'Before a single pattern was cut we spent a year on fabric. The brief sounded impossible: opaque at full stretch, soft enough for all-day wear, structured enough to drape instead of cling, and made responsibly. KalFlex — 88% recycled polyester, 12% elastane — was the fourth mill’s answer, and the moment we felt it we knew the tunic could exist.' },
+        { type: 'img', src: IMG.top2, caption: 'KalFlex at full stretch — opaque, four-way, and soft on the skin.' },
+        { type: 'h2', text: 'Then the fit' },
+        { type: 'p', html: 'A modest cut that moves is a geometry problem. The side slits are set exactly where a deep squat needs them and nowhere else. The hem is weighted to fall back into place after a burpee. The neckline is high without touching the throat. Sixty-plus prototypes, tested by real women in real training — running, lifting, teaching, chasing kids — until the notes stopped coming back.' },
+        { type: 'quote', text: 'The mid-length is perfect — full coverage but I can still do a deep squat without it riding up.', cite: 'Hodan A., verified buyer' },
+        { type: 'h2', text: 'Two lengths, one idea' },
+        { type: 'p', html: 'The tunic ships in two cuts: the Mid-Length, our do-everything original in five colours, and the Full-Length, which drapes to mid-thigh with thumbhole cuffs for maximum coverage. Same fabric, same testing, different lines on the body — because modesty is personal, and the choice should be yours.' },
+        { type: 'shop', title: 'Shop the Biftu Collection', note: 'Both lengths, in every core colour.', ids: ['biftu-mid-tunic', 'biftu-full-tunic'] }
+      ]
+    },
+    {
+      slug: 'five-ways-wide-leg',
+      date: 'MARCH 2026',
+      kicker: 'STYLING',
+      title: 'Five ways to wear the Wide Leg Pant',
+      hero: IMG.confident,
+      standfirst: 'Our most-reviewed piece is also our most versatile. From sunrise training to slow evenings, here are the five looks our community wears on repeat.',
+      blocks: [
+        { type: 'h2', text: '01 — The studio set' },
+        { type: 'p', html: 'The classic. Wide Leg Pant in Black under the Biftu Mid-Length Tunic, Mako hijab to match. The high waistband holds through inversions and the wide hem never catches a heel. This is the combination our Complete Set bundle was built around.' },
+        { type: 'h2', text: '02 — The long run' },
+        { type: 'p', html: 'Swap in the Safiya Sport Hijab for its locked-in fit and let the pant do what it does best: full opacity in motion, zero cling, and a fabric that wicks before you notice you are working.' },
+        { type: 'img', src: IMG.twogirls, caption: 'One pant, two looks — the wide leg reads studio or street depending on the layer.' },
+        { type: 'h2', text: '03 — Studio to street' },
+        { type: 'p', html: 'The trick of the wide leg is that it does not read as activewear. With the Full-Length Tunic in Ivory it becomes an outfit you can wear to lunch straight from class — no changing-room stop required.' },
+        { type: 'h2', text: '04 — The travel uniform' },
+        { type: 'p', html: 'Long-haul flights are where the four-way stretch earns its keep. Pair with the Mako Sport Shawl — it doubles as a blanket layer at altitude and restyles in seconds at arrivals.' },
+        { type: 'h2', text: '05 — Slate on slate' },
+        { type: 'p', html: 'The tonal look: Wide Leg Pant in Slate, Biftu Tunic in Slate, Steel Mako on top. Monochrome layering makes a two-piece outfit read as considered, and every piece already coordinates by design.' },
+        { type: 'quote', text: 'The waistband actually stays in place. Wore them to teach and then straight to the gym.', cite: 'Iqra D., verified buyer' },
+        { type: 'shop', title: 'Build the looks', note: 'Everything styled above, available now.', ids: ['wide-leg-pant', 'biftu-mid-tunic', 'mako-sport-hijab', 'mako-sport-shawl'] }
+      ]
+    },
+    {
+      slug: 'bundles-reimagined',
+      date: 'FEBRUARY 2026',
+      kicker: 'COMING SOON',
+      title: 'Bundles, reimagined',
+      hero: IMG.twogirls,
+      standfirst: 'A complete modest look should not take an hour of cross-referencing colours. Our curated bundles put a full outfit in one click — and they are about to get better.',
+      blocks: [
+        { type: 'p', html: 'The most common message we get from first-time customers is not about fabric or fit — it is "what goes with what?" Modest activewear is layered by nature, and building a first outfit from scratch means matching a tunic, a bottom and a hijab across colours and fabrics. Bundles remove that work entirely.' },
+        { type: 'h2', text: 'Three ways in' },
+        { type: 'p', html: 'The Complete Set is the full Kalsoni look — tunic, wide leg pant and Mako hijab in coordinating colours. The Starter Kit pairs the Full-Length Tunic with a Safiya hijab for a lighter first order. And Mix &amp; Match 3 lets you pick any three core pieces and save — the option our returning customers use most.' },
+        { type: 'shop', title: 'Shop the bundles', note: 'Every set is priced below its pieces bought separately.', ids: ['complete-set', 'starter-kit', 'mix-match-3'] },
+        { type: 'h2', text: 'What’s next' },
+        { type: 'p', html: 'Later this year, bundles get per-piece size selection at checkout, seasonal colour stories that rotate with each drop, and a build-your-own flow that suggests coordinating colours as you pick. The goal: make the bundle the easiest way to shop Kalsoni, whether it is your first order or your fifth.' },
+        { type: 'quote', text: 'Bought the Complete Set as my first Kalsoni order — every piece coordinated and arrived ready to wear.', cite: 'Yasmin A., verified buyer' },
+        { type: 'signup', title: 'Bundle news first', body: 'Be the first to hear when the new bundle builder and seasonal sets go live.', cta: 'KEEP ME POSTED' }
+      ]
+    }
   ];
 
   function money(n) { return '$' + Number(n).toFixed(2); }
+  function getPost(slug) {
+    for (var i = 0; i < journalPosts.length; i++) if (journalPosts[i].slug === slug) return journalPosts[i];
+    return journalPosts[0];
+  }
   function getProduct(id) {
     for (var i = 0; i < products.length; i++) if (products[i].id === id) return products[i];
     return products[0];
@@ -298,8 +428,10 @@
     ugcPosts: ugcPosts,
     lookbook: lookbook,
     journal: journal,
+    journalPosts: journalPosts,
     money: money,
     getProduct: getProduct,
+    getPost: getPost,
     getMany: getMany
   };
 })();
