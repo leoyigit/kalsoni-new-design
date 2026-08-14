@@ -69,7 +69,7 @@
 
   /* ---------- shared markup ---------- */
   function marqueeHTML() {
-    var msg = '<span>FREE SHIPPING OVER $75</span><span class="marquee__dot">&bull;</span>' +
+    var msg = '<span>FREE U.S. SHIPPING ON ORDERS $125+</span><span class="marquee__dot">&bull;</span>' +
       '<span>MORE COVERAGE. MORE FREEDOM TO MOVE.</span><span class="marquee__dot">&bull;</span>' +
       '<span>CERTIFIED B CORPORATION</span><span class="marquee__dot">&bull;</span>' +
       '<span>PERFORMANCE FABRIC, BUILT TO MOVE</span><span class="marquee__dot">&bull;</span>';
@@ -263,8 +263,8 @@
       return;
     }
     var sub = subtotal();
-    var remaining = Math.max(0, 75 - sub);
-    var pct = Math.min(100, sub / 75 * 100);
+    var remaining = Math.max(0, 125 - sub);
+    var pct = Math.min(100, sub / 125 * 100);
     var shipMsg = remaining > 0 ? ("You're " + money(remaining) + ' away from free shipping') : "You've unlocked free shipping";
     var items = cart.map(function (it, idx) {
       return '<div class="cartline">' +
@@ -1036,7 +1036,7 @@
     if (!root) return;
     var cart = getCart();
     var sub = subtotal();
-    var shipping = (sub >= 75 || sub === 0) ? 0 : 6.95;
+    var shipping = (sub >= 125 || sub === 0) ? 0 : 6.95;
     var total = sub + shipping;
     var shipLabel = shipping === 0 ? 'FREE' : money(shipping);
 
