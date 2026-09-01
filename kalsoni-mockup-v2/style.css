@@ -82,8 +82,6 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; }
 
 /* Full-bleed campaign bands: wider than .wrap, capped on large screens */
 .hero-campaign,
-.hijab-campaign,
-.mission-banner,
 .hero2,
 .lb-hero,
 .fabric-intro,
@@ -624,6 +622,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; }
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: none;
   min-height: min(50vh, 720px);
   padding: 100px 32px;
   --muted: #5a5a5a;
@@ -1468,25 +1468,32 @@ a.footer__heading:hover { color: #fff; }
 
 /* ---------- Bundles collection ---------- */
 .bundles-grid {
+  --muted: #9a9a9a;
+  --line: rgba(255, 255, 255, .12);
+  --line2: rgba(255, 255, 255, .22);
+  --card: #141414;
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 40px 32px 96px;
   display: flex;
   flex-direction: column;
   gap: 48px;
+  background: var(--black);
+  color: var(--white);
 }
 .bundle-tile {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   align-items: center;
-  background: var(--white);
-  color: var(--ink);
+  background: var(--black);
+  color: var(--white);
 }
 .bundle-tile:nth-child(even) .bundle-tile__media { order: 2; }
 .bundle-tile__media {
   overflow: hidden;
-  background: #f3f3f3;
+  isolation: isolate;
+  background: white !important;
   aspect-ratio: 1 / 1;
 }
 .bundle-tile__media img {
@@ -1494,18 +1501,22 @@ a.footer__heading:hover { color: #fff; }
   height: 100%;
   object-fit: contain;
   object-position: center;
+  mix-blend-mode: multiply;
   transition: transform 1s cubic-bezier(.2, .8, .2, 1);
 }
 .bundle-tile:hover .bundle-tile__media img { transform: scale(1.04); }
-.bundle-tile__body { padding: 12px 8px; }
+.bundle-tile__body { padding: 12px 8px; color: var(--white); }
+.bundle-tile__body .eyebrow { color: var(--white); opacity: .55; }
 .bundle-tile__body h2 {
   font-size: clamp(24px, 2.6vw, 34px);
   margin: 0 0 12px;
   line-height: 1.15;
+  color: var(--white);
 }
 .bundle-tile__price {
   font-size: 15px;
   margin-bottom: 16px;
+  color: var(--white);
 }
 .bundle-tile__price s {
   opacity: .45;
@@ -1515,7 +1526,7 @@ a.footer__heading:hover { color: #fff; }
 .bundle-tile__body p {
   font-size: 15px;
   line-height: 1.7;
-  color: var(--muted);
+  color: #9a9a9a;
   margin: 0 0 20px;
   max-width: 48ch;
 }
@@ -1523,21 +1534,24 @@ a.footer__heading:hover { color: #fff; }
   list-style: none;
   margin: 0 0 24px;
   padding: 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  color: var(--white);
 }
 .bundle-tile__opts li {
   display: flex;
   justify-content: space-between;
   gap: 16px;
   padding: 11px 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, .12);
   font-size: 13px;
+  color: var(--white);
 }
-.bundle-tile__opts span { letter-spacing: .04em; }
+.bundle-tile__opts span { letter-spacing: .04em; color: var(--white); }
 .bundle-tile__cta {
   font-size: 12px;
   letter-spacing: .2em;
-  border-bottom: 1px solid var(--ink);
+  color: var(--white);
+  border-bottom: 1px solid var(--white);
   padding-bottom: 4px;
 }
 .pdp__bopts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
@@ -2384,13 +2398,19 @@ a.fabric-chip:hover { border-color: #fff; }
 
 /* ---------- Sport hijab campaign (copy | still | video) ---------- */
 .hijab-campaign {
-  display: grid;
-  grid-template-columns: minmax(240px, 1fr) 1.15fr 1.15fr;
-  gap: 28px;
-  padding: 48px 32px 32px;
+  width: 100%;
+  max-width: none;
   --muted: #5a5a5a;
   background: var(--white);
   color: var(--ink);
+}
+.hijab-campaign__inner {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) 1.15fr 1.15fr;
+  gap: 28px;
+  max-width: var(--maxw-hero);
+  margin: 0 auto;
+  padding: 48px 32px 32px;
   overflow: hidden;
 }
 .hijab-campaign__copy {
@@ -2594,7 +2614,7 @@ a.fabric-chip:hover { border-color: #fff; }
     grid-column: auto;
   }
   .hero-campaign__copy h1 { font-size: clamp(24px, 6vw, 34px); max-width: none; }
-  .hijab-campaign {
+  .hijab-campaign__inner {
     grid-template-columns: 1fr;
     min-height: 0;
     gap: 20px;
@@ -2694,6 +2714,27 @@ a.fabric-chip:hover { border-color: #fff; }
    PDP — dark variant + client-mockup sections
    ============================================================ */
 .page-main--dark { background: var(--black); color: var(--white); }
+.page-main--dark .bundles-grid {
+  --muted: #9a9a9a;
+  --line: rgba(255, 255, 255, .12);
+  --line2: rgba(255, 255, 255, .22);
+  --card: #141414;
+  background: var(--black);
+  color: var(--white);
+}
+.page-main--dark .bundle-tile,
+.page-main--dark .bundle-tile__body,
+.page-main--dark .bundle-tile__body h2,
+.page-main--dark .bundle-tile__price,
+.page-main--dark .bundle-tile__opts,
+.page-main--dark .bundle-tile__opts li,
+.page-main--dark .bundle-tile__opts span,
+.page-main--dark .bundle-tile__cta {
+  color: var(--white);
+}
+.page-main--dark .bundle-tile__body p { color: #9a9a9a; }
+.page-main--dark .bundle-tile__cta { border-color: var(--white); }
+.page-main--dark .bundle-tile__media { background: var(--black); }
 .page-main--dark .crumbs span,
 .page-main--dark .pdp__label--row span { color: var(--white); }
 .page-main--dark .pdp-thumb.is-active { border-color: var(--white); }

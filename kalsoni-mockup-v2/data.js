@@ -679,8 +679,8 @@
     description: 'Lightweight, breathable, and thoughtfully shaped for secure coverage through every rep, sprint, stretch, and everyday move.',
     ctaLabel: 'Shop Sport Hijabs',
     ctaHref: 'shop.html?cat=hijabs-shawls',
-    image: CAT + 'mako-hijab-black.jpg',
-    imageAlt: 'Kalsoni sport hijab',
+    image: CAT + 'safiya-shawl-black-side.jpg',
+    imageAlt: 'Safiya Sport Shawl in Black',
     video: 'assets/kalsoni-video.mp4',
     videoPoster: CAT + 'mako-hijab-black.jpg'
   };

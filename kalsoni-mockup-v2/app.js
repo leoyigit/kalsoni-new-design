@@ -397,14 +397,16 @@
         ? '<video autoplay muted loop playsinline poster="' + esc(hc.videoPoster || hc.image) + '" src="' + esc(hc.video) + '"></video>'
         : '<img src="' + esc(hc.videoPoster || hc.image) + '" alt="' + esc(hc.imageAlt || '') + '">';
       hijabRoot.innerHTML =
+        '<div class="hijab-campaign__inner">' +
         '<div class="hijab-campaign__copy">' +
           (hc.kicker ? '<span class="eyebrow">' + esc(hc.kicker) + '</span>' : '') +
           '<h2>' + esc(hc.headline) + '</h2>' +
           (hc.description ? '<p class="hijab-campaign__desc">' + esc(hc.description) + '</p>' : '') +
           '<a class="link-underline hijab-campaign__cta" href="' + esc(hc.ctaHref) + '">' + esc(hc.ctaLabel).toUpperCase() + ' &rarr;</a>' +
         '</div>' +
-        '<div class="hijab-campaign__still"><img src="' + esc(hc.image) + '" alt="' + esc(hc.imageAlt || '') + '"></div>' +
-        '<div class="hijab-campaign__video">' + videoHtml + '</div>';
+        '<div class="hijab-campaign__still"><img src="assets/catalog/safiya-shawl-black-side.jpg" alt="' + esc(hc.imageAlt || 'Safiya Sport Shawl in Black') + '"></div>' +
+        '<div class="hijab-campaign__video">' + videoHtml + '</div>' +
+        '</div>';
     }
 
     var missionRoot = $('#about.mission-banner');
